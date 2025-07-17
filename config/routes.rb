@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  mount ActiveStorage::Engine => "/rails/active_storage"
   get 'items/index'
   get 'items/new'
   get 'items/create'
   get 'items/edit'
   get 'items/update'
   get 'items/destroy'
+  resources :items
+
 get   '/password_reset/new',               to: 'password_resets#new',    as: :new_password_reset
 post  '/password_reset',                   to: 'password_resets#create', as: :password_resets
 get   '/password_reset/:token/edit',       to: 'password_resets#edit',   as: :edit_password_reset

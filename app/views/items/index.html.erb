@@ -1,2 +1,40 @@
-<h1>Items#index</h1>
-<p>Find me in app/views/items/index.html.erb</p>
+<h1>アイテム一覧</h1>
+
+<%= link_to '新しいアイテムを登録する', new_item_path, class: 'btn' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>名前</th>
+      <th>ブランド</th>
+      <th>カテゴリ</th>
+      <th>値段</th>
+      <th>説明</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td>
+          <% if item.image.attached? %>
+            <%= image_tag item.image %>
+          <% else %>
+            画像なし
+          <% end %>
+        </td>
+        <td><%= item.name %></td>
+        <td><%= item.brand %></td>
+        <td><%= item.category %></td>
+        <td><%= number_to_currency(item.price, unit: "¥") %></td>
+        <td><%= item.description %></td>
+        <td>
+          <%= link_to '編集', edit_item_path(item) %> |
+          <%= link_to '削除', item_path(item), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

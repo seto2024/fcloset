@@ -1,2 +1,6 @@
 class Item < ApplicationRecord
-end
+    has_one_attached :image 
+  
+    validates :name, presence: true
+    # 他のバリデーションもここに
+  end
