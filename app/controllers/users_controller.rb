@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create]
+
   def new
     @user = User.new
   end
@@ -10,7 +12,7 @@ class UsersController < ApplicationController
       redirect_to root_path, notice: '新規登録しました！'
     else
       flash.now[:alert] = '登録に失敗しました'
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
     

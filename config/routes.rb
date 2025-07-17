@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'items/index'
+  get 'items/new'
+  get 'items/create'
+  get 'items/edit'
+  get 'items/update'
+  get 'items/destroy'
+get   '/password_reset/new',               to: 'password_resets#new',    as: :new_password_reset
+post  '/password_reset',                   to: 'password_resets#create', as: :password_resets
+get   '/password_reset/:token/edit',       to: 'password_resets#edit',   as: :edit_password_reset
+patch '/password_reset/:token',            to: 'password_resets#update', as: :password_reset
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
  root 'home#index'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -10,6 +20,11 @@ Rails.application.routes.draw do
 
   get  '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
+  resources :password_resets, only: [:new, :create, :edit, :update], param: :token
+  
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
   # Defines the root path route ("/")
   # root "posts#index"
 end

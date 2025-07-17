@@ -1,16 +1,20 @@
+require Rails.root.join('app/mailers/application_mailer')
 # The first thing you need to configure is which modules you need in your app.
 # The default is nothing which will include only core features (password encryption, login/logout).
 #
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-Rails.application.config.sorcery.submodules = []
+Rails.application.config.sorcery.submodules = [:core, :reset_password]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
   config.user_config do |user|
     user.username_attribute_names = [:email]
+    user.reset_password_mailer = UserMailer
+    user.stretches = 1 if Rails.env.test?
   end
+
   # -- core --
   # What controller action to call for non-authenticated users. You can also
   # override the 'not_authenticated' method of course.
@@ -245,7 +249,6 @@ Rails.application.config.sorcery.configure do |config|
   # config.battlenet.callback_url = "http://localhost:3000/oauth/callback?provider=battlenet"
   # config.battlenet.scope = "openid"
   # --- user config ---
-  config.user_config do |user|
     # -- core --
     # Specify username attributes, for example: [:username, :email].
     # Default: `[:email]`
@@ -284,8 +287,6 @@ Rails.application.config.sorcery.configure do |config|
 
     # How many times to apply encryption to the password.
     # Default: 1 in test env, `nil` otherwise
-    #
-    user.stretches = 1 if Rails.env.test?
 
     # Encryption key used to encrypt reversible encryptions such as AES256.
     # WARNING: If used for users' passwords, changing this key will leave passwords undecryptable!
@@ -562,7 +563,6 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `:uid`
     #
     # user.provider_uid_attribute_name =
-  end
 
   # This line must come after the 'user config' block.
   # Define which model authenticates with sorcery.
