@@ -11,12 +11,12 @@
     <% end %>
 
     <div>
-      <%= f.label :image %><br>
+      <%= f.label :image, '画像（※名前または画像どちらか必須）'%><br>
       <%= f.file_field :image %>
     </div>
   
     <div>
-      <%= f.label :name, '名前' %><br>
+      <%= f.label :name, '名前（※名前または画像どちらか必須）' %><br>
       <%= f.text_field :name %>
     </div>
   
@@ -32,7 +32,7 @@
   
     <div>
       <%= f.label :price, '値段' %><br>
-      <%= f.number_field :price %>
+      <%= f.text_field :price, placeholder: '例：1500 (半角数字・カンマなし)' %>
     </div>
 
     <div>
