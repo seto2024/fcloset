@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :destroy]
 
   def index
-    @items = Item.all
+    @items = current_user.items
   
     @items = @items.where(category: params[:category]) if params[:category].present?
     @items = @items.where(brand: params[:brand]) if params[:brand].present?
@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = current_user.items.build(item_params) 
     if @item.save
       redirect_to items_path, notice: "アイテムを登録しました"
     else
@@ -63,6 +63,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :brand, :category, :price, :image, :color, :keyword1, :keyword2 )
+    params.require(:item).permit(:image, :name, :description, :brand, :category, :price, :color, :keyword1, :keyword2 )
   end
 end

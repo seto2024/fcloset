@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.merge(first_login: true))  # ←ここ！
     if @user.save
       auto_login(@user)
       redirect_to items_path, notice: '新規登録しました！'

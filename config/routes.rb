@@ -24,7 +24,7 @@ patch '/password_reset/:token',            to: 'password_resets#update', as: :pa
   get  '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   resources :password_resets, only: [:new, :create, :edit, :update], param: :token
-  
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
