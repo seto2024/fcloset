@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
+  get 'how_tos/show'
   mount ActiveStorage::Engine => "/rails/active_storage"
-  get 'items/index'
-  get 'items/new'
-  get 'items/create'
-  get 'items/edit'
-  get 'items/update'
-  get 'items/destroy'
   resources :items
 
 get   '/password_reset/new',               to: 'password_resets#new',    as: :new_password_reset
@@ -23,6 +18,8 @@ patch '/password_reset/:token',            to: 'password_resets#update', as: :pa
 
   get  '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
+
+  get '/how_to', to: 'how_tos#show', as: :how_to
   resources :password_resets, only: [:new, :create, :edit, :update], param: :token
 
   if Rails.env.development?

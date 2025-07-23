@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
 
+  before_action :redirect_first_login
   before_action :require_login
 
   private
@@ -18,5 +19,14 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "ログインしてください"
       redirect_to items_path
     end
+  end
+
+  def redirect_first_login
+    return unless logged_in?
+    return unless request.get?
+    return if request.path.in?([how_to_path, new_item_path, logout_path]) 
+    return unless current_user.first_login?
+  
+    redirect_to how_to_path
   end
 end

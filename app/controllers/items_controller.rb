@@ -28,6 +28,7 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.build(item_params) 
     if @item.save
+      current_user.update_column(:first_login, false)
       redirect_to items_path, notice: "アイテムを登録しました"
     else
       flash.now[:alert] = "登録に失敗しました"
