@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+root 'home#index'
+
+  get 'home/index'
   get 'how_tos/show'
   mount ActiveStorage::Engine => "/rails/active_storage"
   resources :items
@@ -8,7 +11,7 @@ post  '/password_reset',                   to: 'password_resets#create', as: :pa
 get   '/password_reset/:token/edit',       to: 'password_resets#edit',   as: :edit_password_reset
 patch '/password_reset/:token',            to: 'password_resets#update', as: :password_reset
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
- root 'items#index'
+ #root 'items#index'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
