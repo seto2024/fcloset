@@ -1,0 +1,26 @@
+<h1><%= @item.name %> の詳細</h1>
+
+<div>
+  <% if @item.image.attached? %>
+    <%= image_tag @item.image, style: "max-width: 300px;" %>
+  <% else %>
+    <p>画像なし</p>
+  <% end %>
+</div>
+
+<ul>
+  <li><strong>ブランド:</strong> <%= @item.brand %></li>
+  <li><strong>カテゴリ:</strong> <%= @item.category %></li>
+  <li><strong>カラー:</strong> <%= @item.color %></li>
+  <% keywords = [@item.keyword1, @item.keyword2].map { |k| k.to_s.strip.downcase }.reject(&:blank?).uniq %>
+  <% if keywords.any? %>
+    <li><strong>キーワード:</strong> <%= keywords.join(' / ') %></li>
+  <% end %>
+  <li><strong>値段:</strong> <%= number_to_currency(@item.price, unit: "¥") %></li>
+  <li><strong>説明:</strong> <%= @item.description %></li>
+
+</ul>
+
+<%= link_to '編集する', edit_item_path(@item), class: 'btn' %> |
+<%= link_to '一覧に戻る', items_path, class: 'btn' %>
+

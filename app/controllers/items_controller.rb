@@ -3,7 +3,11 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :destroy]
 
   def index
-    @items = Item.all
+    if params[:category].present?
+      @items = Item.where(category: params[:category])
+    else
+      @items = Item.all
+    end
   end
 
   def new
@@ -18,6 +22,10 @@ class ItemsController < ApplicationController
       flash.now[:alert] = "登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   def edit
@@ -44,6 +52,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :brand, :category, :price, :image )
+    params.require(:item).permit(:name, :description, :brand, :category, :price, :image, :color, :keyword1, :keyword2 )
   end
 end

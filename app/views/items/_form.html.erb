@@ -1,4 +1,4 @@
-<%= form_with(model: item, local: true html: { multipart: true}) do |f| %>
+<%= form_with(model: item, local: true, html: { multipart: true}) do |f| %>
     <% if item.errors.any? %>
       <div>
         <h2><%= pluralize(item.errors.count, "エラー") %>があります：</h2>
@@ -33,6 +33,21 @@
     <div>
       <%= f.label :price, '値段' %><br>
       <%= f.number_field :price %>
+    </div>
+
+    <div>
+      <%= f.label :color, 'カラー' %><br>
+      <%= f.text_field :color %>
+    </div>
+
+    <div>
+      <%= f.label :keyword1, 'キーワード①' %><br>
+      <%= f.text_field :keyword1 %>
+    </div>
+
+    <div>
+      <%= f.label :keyword2, 'キーワード②' %><br>
+      <%= f.text_field :keyword2 %>
     </div>
   
     <div>

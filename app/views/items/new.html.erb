@@ -1,35 +1,5 @@
-<%= form_with(model: @item, local: true, html: { multipart: true }) do |f| %>
-    <div>
-      <%= f.label :name %><br>
-      <%= f.text_field :name %>
-    </div>
-  
-    <div>
-      <%= f.label :brand %><br>
-      <%= f.text_field :brand %>
-    </div>
-  
-    <div>
-      <%= f.label :category %><br>
-      <%= f.text_field :category %>
-    </div>
-  
-    <div>
-      <%= f.label :price %><br>
-      <%= f.number_field :price %>
-    </div>
-  
-    <div>
-      <%= f.label :description %><br>
-      <%= f.text_area :description %>
-    </div>
-  
-    <div>
-      <%= f.label :image %><br>
-      <%= f.file_field :image %>
-    </div>
-  
-    <div>
-      <%= f.submit '登録する' %>
-    </div>
-  <% end %>
+<h1>アイテムを登録する</h1>
+
+<%= render 'form', item: @item %>
+
+<%= link_to '一覧に戻る', items_path %>

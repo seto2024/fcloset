@@ -13,7 +13,7 @@ post  '/password_reset',                   to: 'password_resets#create', as: :pa
 get   '/password_reset/:token/edit',       to: 'password_resets#edit',   as: :edit_password_reset
 patch '/password_reset/:token',            to: 'password_resets#update', as: :password_reset
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
- root 'home#index'
+ root 'items#index'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
@@ -29,5 +29,5 @@ patch '/password_reset/:token',            to: 'password_resets#update', as: :pa
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
   # Defines the root path route ("/")
-  # root "posts#index"
+  #root "posts#index"
 end

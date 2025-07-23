@@ -1,5 +1,21 @@
 <h1>アイテム一覧</h1>
 
+<h2>カテゴリで絞り込み：</h2>
+<ul>
+  <li><%= link_to 'すべて', items_path %></li>
+  <li><%= link_to 'トップス', items_path(category: 'トップス') %></li>
+  <li><%= link_to 'パンツ', items_path(category: 'パンツ') %></li>
+  <li><%= link_to 'スカート', items_path(category: 'スカート') %></li>
+  <li><%= link_to 'ワンピース', items_path(category: 'ワンピース') %></li>
+  <li><%= link_to 'コート', items_path(category: 'コート') %></li>
+  <li><%= link_to '小物', items_path(category: '小物') %></li>
+  <li><%= link_to 'アクセサリー', items_path(category: 'アクセサリー') %></li>
+</ul>
+
+<% if params[:category].present? %>
+  <p>「<%= params[:category] %>」カテゴリのアイテムを表示中</p>
+<% end %>
+
 <%= link_to '新しいアイテムを登録する', new_item_path, class: 'btn' %>
 
 <table>
@@ -9,6 +25,9 @@
       <th>名前</th>
       <th>ブランド</th>
       <th>カテゴリ</th>
+      <th>カラー</th>
+      <th>キーワード①</th>
+      <th>キーワード②</th>
       <th>値段</th>
       <th>説明</th>
       <th></th>
@@ -18,21 +37,26 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td>
-          <% if item.image.attached? %>
-            <%= image_tag item.image %>
-          <% else %>
-            画像なし
-          <% end %>
-        </td>
+      <td>
+      <% if item.image.attached? %>
+        <%= link_to item_path(item) do %>
+          <%= image_tag item.image %>
+        <% end %>
+      <% else %>
+        画像なし
+      <% end %>
+    </td>
         <td><%= item.name %></td>
         <td><%= item.brand %></td>
         <td><%= item.category %></td>
+        <td><%= item.color %></td>
+        <% keywords = [item.keyword1, item.keyword2].map { |k| k.to_s.strip.downcase }.reject(&:blank?).uniq %>
+        <td><%= keywords.any? ? keywords.join(' / ') : 'なし' %></td>
         <td><%= number_to_currency(item.price, unit: "¥") %></td>
         <td><%= item.description %></td>
         <td>
           <%= link_to '編集', edit_item_path(item) %> |
-          <%= link_to '削除', item_path(item), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+          <%= button_to '削除', item_path(item), method: :delete, onclick: "return confirm('本当に削除しますか？');" %>
         </td>
       </tr>
     <% end %>
