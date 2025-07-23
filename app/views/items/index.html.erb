@@ -1,19 +1,35 @@
 <h1>アイテム一覧</h1>
 
-<h2>カテゴリで絞り込み：</h2>
-<ul>
-  <li><%= link_to 'すべて', items_path %></li>
-  <li><%= link_to 'トップス', items_path(category: 'トップス') %></li>
-  <li><%= link_to 'パンツ', items_path(category: 'パンツ') %></li>
-  <li><%= link_to 'スカート', items_path(category: 'スカート') %></li>
-  <li><%= link_to 'ワンピース', items_path(category: 'ワンピース') %></li>
-  <li><%= link_to 'コート', items_path(category: 'コート') %></li>
-  <li><%= link_to '小物', items_path(category: '小物') %></li>
-  <li><%= link_to 'アクセサリー', items_path(category: 'アクセサリー') %></li>
-</ul>
+<%= form_with url: items_path, method: :get, local: true do %>
+  <label>カテゴリ：</label>
+  <%= select_tag :category, options_for_select(['', 'トップス', 'パンツ', 'スカート', 'ワンピース', 'コート', '小物', 'アクセサリー'], params[:category]) %>
 
-<% if params[:category].present? %>
-  <p>「<%= params[:category] %>」カテゴリのアイテムを表示中</p>
+  <label>ブランド：</label>
+  <%= text_field_tag :brand, params[:brand] %>
+
+  <label>カラー：</label>
+  <%= text_field_tag :color, params[:color] %>
+
+  <label>キーワード：</label>
+  <%= text_field_tag :keyword, params[:keyword] %>
+
+  <label>値段順：</label>
+  <%= select_tag :sort, options_for_select([['', ''], ['安い順', 'price_asc'], ['高い順', 'price_desc']], params[:sort]) %>
+
+  <%= submit_tag '絞り込む' %>
+<% end %>
+
+
+<% filters = [] %>
+<% filters << "カテゴリ: #{params[:category]}" if params[:category].present? %>
+<% filters << "ブランド: #{params[:brand]}" if params[:brand].present? %>
+<% filters << "カラー: #{params[:color]}" if params[:color].present? %>
+<% filters << "キーワード: #{params[:keyword]}" if params[:keyword].present? %>
+<% filters << "値段: 安い順" if params[:sort] == 'price_asc' %>
+<% filters << "値段: 高い順" if params[:sort] == 'price_desc' %>
+
+<% if filters.any? %>
+  <p>絞り込み条件：<%= filters.join(" / ") %></p>
 <% end %>
 
 <%= link_to '新しいアイテムを登録する', new_item_path, class: 'btn' %>
@@ -26,8 +42,7 @@
       <th>ブランド</th>
       <th>カテゴリ</th>
       <th>カラー</th>
-      <th>キーワード①</th>
-      <th>キーワード②</th>
+      <th>キーワード</th>
       <th>値段</th>
       <th>説明</th>
       <th></th>

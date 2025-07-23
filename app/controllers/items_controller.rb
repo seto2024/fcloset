@@ -3,10 +3,21 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :destroy]
 
   def index
-    if params[:category].present?
-      @items = Item.where(category: params[:category])
-    else
-      @items = Item.all
+    @items = Item.all
+  
+    @items = @items.where(category: params[:category]) if params[:category].present?
+    @items = @items.where(brand: params[:brand]) if params[:brand].present?
+    @items = @items.where(color: params[:color]) if params[:color].present?
+  
+    if params[:keyword].present?
+      keyword = params[:keyword].downcase
+      @items = @items.where("LOWER(keyword1) = ? OR LOWER(keyword2) = ?", keyword, keyword)
+    end
+  
+    if params[:sort] == 'price_asc'
+      @items = @items.order(price: :asc)
+    elsif params[:sort] == 'price_desc'
+      @items = @items.order(price: :desc)
     end
   end
 
