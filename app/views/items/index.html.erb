@@ -53,14 +53,14 @@
     <% @items.each do |item| %>
       <tr>
       <td>
-      <% if item.image.attached? %>
-        <%= link_to item_path(item) do %>
-          <%= image_tag item.image %>
-        <% end %>
-      <% else %>
-        画像なし
-      <% end %>
-    </td>
+  <% if item.image.attached? %>
+    <%= link_to item_path(item) do %>
+      <%= image_tag item.image %>
+    <% end %>
+  <% else %>
+    <%= link_to item.name, item_path(item) %>
+  <% end %>
+</td>
         <td><%= item.name %></td>
         <td><%= item.brand %></td>
         <td><%= item.category %></td>
