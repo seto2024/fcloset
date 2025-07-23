@@ -27,7 +27,7 @@
   
     <div>
       <%= f.label :category, 'カテゴリ' %><br>
-      <%= f.text_field :category %>
+      <%= f.select :category, Item::CATEGORIES, { prompt: '選択してください' } %>
     </div>
   
     <div>
@@ -37,7 +37,7 @@
 
     <div>
       <%= f.label :color, 'カラー' %><br>
-      <%= f.text_field :color %>
+      <%= f.select :color, Item::COLORS, { prompt: '選択してください' } %>
     </div>
 
     <div>
