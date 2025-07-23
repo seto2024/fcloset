@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'settings/show'
 root 'home#index'
 
   get 'home/index'
@@ -22,6 +23,8 @@ patch '/password_reset/:token',            to: 'password_resets#update', as: :pa
   get  '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
 
+  get '/settings', to: 'settings#show', as: :settings
+  
   get '/how_to', to: 'how_tos#show', as: :how_to
   resources :password_resets, only: [:new, :create, :edit, :update], param: :token
 

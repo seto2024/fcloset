@@ -20,12 +20,13 @@
     <% end %>
     
     <% if logged_in? %>
-  <p>こんにちは、<%= current_user.email %> さん！</p>
-  <%= button_to 'ログアウト', logout_path, method: :delete, form: { "data-turbo" => false } %>
-<% else %>
-  <%= link_to 'ログイン', login_path %>
-  <%= link_to '新規登録', signup_path %>
-<% end %>
+      <p>こんにちは、<%= current_user.email %> さん！</p>
+      <nav class="flex gap-4 p-2 bg-gray-100">
+        <%= link_to '設定', settings_path, class: "text-blue-600" %>
+        <%= link_to 'アイテム一覧', items_path, class: "text-blue-600" %>
+        <%= link_to 'アイテム登録', new_item_path, class: "text-blue-600" %>
+     </nav>
+    <% end %>
   
     <%= yield %>
   </body>
