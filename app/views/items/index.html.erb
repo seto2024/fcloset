@@ -1,14 +1,21 @@
 <h1>アイテム一覧</h1>
 
 <%= form_with url: items_path, method: :get, local: true do %>
+
   <label>カテゴリ：</label>
-  <%= select_tag :category, options_for_select(['', 'トップス', 'パンツ', 'スカート', 'ワンピース', 'コート', '小物', 'アクセサリー','バッグ','靴'], params[:category]) %>
+  <%= select_tag :category, options_for_select(
+  [['-- カテゴリを選択 --', ''], ['トップス', 'トップス'], ['パンツ', 'パンツ'], ['スカート', 'スカート'], ['ワンピース', 'ワンピース'], ['コート', 'コート'], ['小物', '小物'], ['アクセサリー', 'アクセサリー'], ['バッグ', 'バッグ'], ['靴', '靴'], ['その他', 'その他']],
+  params[:category]
+) %>
 
   <label>ブランド：</label>
   <%= text_field_tag :brand, params[:brand] %>
 
   <label>カラー：</label>
-  <%= text_field_tag :color, params[:color] %>
+  <%= select_tag :color, options_for_select(
+  [['-- カラーを選択 --', ''], ['白', '白'], ['黒', '黒'], ['グレー', 'グレー'], ['赤', '赤'], ['青', '青'], ['緑', '緑'], ['黄', '黄'], ['ピンク', 'ピンク'], ['ベージュ', 'ベージュ'], ['ブラウン', 'ブラウン'], ['その他', 'その他']],
+  params[:color]
+) %>
 
   <label>キーワード：</label>
   <%= text_field_tag :keyword, params[:keyword] %>
@@ -17,6 +24,7 @@
   <%= select_tag :sort, options_for_select([['', ''], ['安い順', 'price_asc'], ['高い順', 'price_desc']], params[:sort]) %>
 
   <%= submit_tag '絞り込む' %>
+   <%= link_to "絞り込みリセット", items_path, class: "ml-2 text-sm text-blue-500 underline" %>
 <% end %>
 
 
