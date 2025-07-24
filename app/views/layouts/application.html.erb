@@ -11,7 +11,7 @@
   </head>
 
   <body>
-  <% if notice %>
+    <% if notice %>
       <p style="color: green;"><%= notice %></p>
     <% end %>
 
@@ -19,15 +19,16 @@
       <p style="color: red;"><%= alert %></p>
     <% end %>
     
-    <% if logged_in? %>
-      <p>こんにちは、<%= current_user.email %> さん！</p>
-      <nav class="flex gap-4 p-2 bg-gray-100">
-        <%= link_to '設定', settings_path, class: "text-blue-600" %>
-        <%= link_to 'アイテム一覧', items_path, class: "text-blue-600" %>
-        <%= link_to 'アイテム登録', new_item_path, class: "text-blue-600" %>
+  <% if user_signed_in? %>
+    <p>こんにちは、<%= current_user.email %> さん！</p>
+
+    <nav class="flex gap-4 p-2 bg-gray-100">
+      <%= link_to '設定', settings_path, class: "text-blue-600" %>
+      <%= link_to 'アイテム一覧', items_path, class: "text-blue-600" %>
+      <%= link_to 'アイテム登録', new_item_path, class: "text-blue-600" %>
      </nav>
-    <% end %>
-  
+  <% end %>
+
     <%= yield %>
   </body>
 </html>

@@ -1,5 +1,5 @@
 require_relative "boot"
-
+require 'devise'
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
@@ -11,6 +11,7 @@ module App
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
+    config.i18n.default_locale = :ja
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.

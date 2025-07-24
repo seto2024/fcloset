@@ -10,4 +10,4 @@
   <p class="text-xs text-gray-500 mt-1">※現在見た目だけ</p>
 </div>
 
-<%= button_to 'ログアウト', logout_path, method: :delete, form: { "data-turbo" => false } %>
+<%= button_to 'ログアウト', destroy_user_session_path, method: :delete, form: { "data-turbo" => false } %>

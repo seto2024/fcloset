@@ -1,0 +1,53 @@
+ja:
+  devise:
+    confirmations:
+      confirmed: アカウントを確認しました。
+      send_instructions: 数分以内に確認手順を含むメールを送信します。
+      send_paranoid_instructions: メールアドレスが登録済みである場合、確認手順が記載されたメールが数分以内に届きます。
+    failure:
+      already_authenticated: すでにログインしています。
+      inactive: アカウントが有効化されていません。
+      invalid: メールアドレスまたはパスワードが正しくありません。
+      locked: アカウントがロックされています。
+      last_attempt: 残り1回のログイン試行でアカウントがロックされます。
+      not_found_in_database: メールアドレスまたはパスワードが正しくありません。
+      timeout: セッションがタイムアウトしました。もう一度ログインしてください。
+      unauthenticated: 続けるにはログインしてください。
+      unconfirmed: アカウントの確認が必要です。
+    sessions:
+      signed_in: ログインしました。
+      signed_out: ログアウトしました。
+      already_signed_out: 既にログアウトしています。
+      new:
+        sign_in: "ログイン"
+        email: "メールアドレス"
+        password: "パスワード"
+        remember_me: "ログイン状態を保持する"
+        submit: "ログインする"
+    passwords:
+      no_token: パスワードリセットトークンがありません。
+      send_instructions: 数分以内にパスワードリセット手順を含むメールが届きます。
+      send_paranoid_instructions: メールアドレスが登録済みである場合、パスワードリセット手順が記載されたメールが数分以内に届きます。
+      updated: パスワードが正しく変更されました。
+      updated_not_active: パスワードが正しく変更されました。
+    registrations:
+      signed_up: アカウント登録が完了しました。
+      signed_up_but_inactive: アカウントは作成されましたが、有効化されていません。
+      signed_up_but_locked: アカウントは作成されましたが、ロックされています。
+      signed_up_but_unconfirmed: アカウントは作成されましたが、確認が必要です。
+      update_needs_confirmation: プロフィールを更新しましたが、メールアドレスの確認が必要です。
+      updated: アカウント情報を変更しました。
+      updated_but_not_signed_in: アカウント情報を変更しましたが、再ログインが必要です。
+    mailer:
+      confirmation_instructions:
+        subject: アカウント確認手順
+      reset_password_instructions:
+        subject: パスワードのリセット手順
+      unlock_instructions:
+        subject: アカウントのロック解除手順
+  errors:
+    messages:
+      expired: 有効期限が切れています
+      not_found: 見つかりませんでした
+      already_confirmed: すでに確認済みです
+      not_locked: ロックされていません

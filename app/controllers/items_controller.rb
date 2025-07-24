@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :require_login
+  before_action :redirect_first_login
   before_action :set_item, only: [:edit, :update, :destroy]
 
   def index
-    @items = current_user.items
+    @items = current_user&.items || []
   
     @items = @items.where(category: params[:category]) if params[:category].present?
     @items = @items.where(brand: params[:brand]) if params[:brand].present?
@@ -65,5 +65,12 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :name, :description, :brand, :category, :price, :color, :keyword1, :keyword2 )
+  end
+
+  def redirect_first_login
+    return unless user_signed_in? && current_user.first_login?
+    return if request.path == settings_path || request.path == destroy_user_session_path
+
+    redirect_to settings_path
   end
 end
