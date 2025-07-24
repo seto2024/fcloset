@@ -71,4 +71,4 @@ MVPでは3種類のテーマカラーを用意し、ユーザーの好みによ�
 
 ## ER図
 
-![ER図](https://i.gyazo.com/f2228d45dc43851968e09f0f479b4d66.png)
+![ER図](https://i.gyazo.com/7280a8f0b7962477400ac3a809441ce8.png)
