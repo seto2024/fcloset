@@ -71,6 +71,4 @@ MVPでは3種類のテーマカラーを用意し、ユーザーの好みによ�
 
 ## ER図
 
-以下のER図をもとにテーブル設計を行いました。
-
 ![ER図](https://i.gyazo.com/ffbc5bd02e33681f5c20db0e1e4ecafc.png)
