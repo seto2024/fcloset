@@ -13,11 +13,21 @@
       </div>
     <% end %>
 
-    <%# 画像 %>
-    <div class="mb-4">
-      <%= f.label :image, '画像（※名前または画像どちらか必須）', class: "block font-medium mb-1" %>
-      <%= f.file_field :image, class: "block w-full text-sm" %>
-    </div>
+   <%# 画像 %>
+   <div class="mb-4">
+   <%= f.label :image, '画像（※名前または画像どちらか必須）', class: "block font-medium mb-1" %>
+   <%= f.file_field :image, accept: 'image/*', id: 'image_input', class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" %>
+ 
+   <div id="preview_container" class="mt-4 flex justify-center">
+    <img
+    id="preview_image"
+    src="#"
+    alt="プレビュー"
+    class="hidden rounded border object-contain
+           w-[160px] sm:w-[180px] md:w-[220px] lg:w-[250px] h-auto max-h-[250px]" />
+   </div>
+ </div>
+
 
     <%# 名前 %>
     <div class="mb-4">
