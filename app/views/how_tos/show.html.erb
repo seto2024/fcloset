@@ -1,16 +1,31 @@
-<h1>ようこそ！Fclosetへ</h1>
-<p>Fcloset（フクローゼット）は、あなたのクローゼットをまるごとスマホの中に。<br>
-ファッションアイテムの在庫管理ができるアプリです。</p>
+<div class="max-w-md mx-auto px-4 py-8 bg-white rounded-lg shadow-md text-gray-800">
 
-<p>こんなお悩み、ありませんか？</p>
-<ul>
-  <li>💭「持ってるアイテムが把握できていない…同じようなものを買ってしまった…」</li>
-  <li>💭「持っている服に合わないアイテムを買ってしまい失敗…」</li>
-  <li>💭「自分の持っているファッションアイテムを可視化したい」</li>
-</ul>
+  <h1 class="text-2xl font-bold text-center mb-4">ようこそ！Fclosetへ</h1>
 
-<p>Fclosetがあれば、<strong>あなたのファッションがもっと自由に、もっと楽しく</strong>なります。</p>
+  <p class="text-sm mb-4 leading-relaxed">
+    Fcloset（フクローゼット）は、あなたのクローゼットをまるごとスマホの中に。
+    <br>
+    ファッションアイテムの在庫管理ができるアプリです。
+  </p>
 
-<h2>さあ、自分だけのクローゼットを完成させよう！</h2>
+  <p class="font-semibold mb-2">こんなお悩み、ありませんか？</p>
+  <ul class="text-sm list-disc list-inside space-y-1 mb-6">
+    <li>💭 持ってるアイテムが把握できていない…同じようなものを買ってしまった…</li>
+    <li>💭 持っている服に合わないアイテムを買ってしまい失敗…</li>
+    <li>💭 自分の持っているファッションアイテムを可視化したい</li>
+  </ul>
 
-<%= link_to "さっそくアイテムを登録する", new_item_path, class: "btn" %>
+  <p class="text-sm mb-6">
+    Fclosetがあれば、
+    <span class="font-semibold text-pink-600">あなたのファッションがもっと自由に、もっと楽しく</span>
+    なります。
+  </p>
+
+  <h2 class="text-lg font-bold text-center mb-4">さあ、自分だけのクローゼットを完成させよう！</h2>
+
+  <div class="text-center">
+    <%= link_to "さっそくアイテムを登録する", new_item_path,
+      class: "inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded transition duration-200" %>
+  </div>
+
+</div>
