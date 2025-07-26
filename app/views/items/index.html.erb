@@ -1,31 +1,52 @@
-
 <%= form_with url: items_path, method: :get, local: true do %>
+  <div class="flex flex-wrap justify-center items-end gap-2 mt-4 mb-6 text-sm">
 
-  <label>カテゴリ：</label>
-  <%= select_tag :category, options_for_select(
-  [['-- カテゴリを選択 --', ''], ['トップス', 'トップス'], ['パンツ', 'パンツ'], ['スカート', 'スカート'], ['ワンピース', 'ワンピース'], ['コート', 'コート'], ['小物', '小物'], ['アクセサリー', 'アクセサリー'], ['バッグ', 'バッグ'], ['靴', '靴'], ['その他', 'その他']],
-  params[:category]
-) %>
+    <div>
+      <%= select_tag :category,
+        options_for_select(
+          [['-- カテゴリ --', '']] + Item::CATEGORIES.map { |c| [c, c] },
+          params[:category]
+        ),
+        class: "border border-gray-300 rounded px-2 py-1 w-36" %>
+    </div>
 
-  <label>ブランド：</label>
-  <%= text_field_tag :brand, params[:brand] %>
+    <div>
+      <%= text_field_tag :brand, params[:brand], placeholder: "ブランド",
+        class: "border border-gray-300 rounded px-2 py-1 w-36" %>
+    </div>
 
-  <label>カラー：</label>
-  <%= select_tag :color, options_for_select(
-  [['-- カラーを選択 --', ''], ['白', '白'], ['黒', '黒'], ['グレー', 'グレー'], ['赤', '赤'], ['青', '青'], ['緑', '緑'], ['黄', '黄'], ['ピンク', 'ピンク'], ['ベージュ', 'ベージュ'], ['ブラウン', 'ブラウン'], ['その他', 'その他']],
-  params[:color]
-) %>
+    <div>
+      <%= select_tag :color,
+        options_for_select(
+          ['-- カラー --', ''] + Item::COLORS,
+          params[:color]
+        ),
+        class: "border border-gray-300 rounded px-2 py-1 w-36" %>
+    </div>
 
-  <label>キーワード：</label>
-  <%= text_field_tag :keyword, params[:keyword] %>
+    <div>
+      <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワード",
+        class: "border border-gray-300 rounded px-2 py-1 w-36" %>
+    </div>
 
-  <label>値段順：</label>
-  <%= select_tag :sort, options_for_select([['', ''], ['安い順', 'price_asc'], ['高い順', 'price_desc']], params[:sort]) %>
+    <div>
+    <%= select_tag :sort, options_for_select([
+      ['-- 値段順 --', ''],
+      ['安い順', 'price_asc'],
+      ['高い順', 'price_desc']
+    ], params[:sort]), class: "border border-gray-300 rounded px-2 py-1 w-36" %>
+    </div>
 
-  <%= submit_tag '絞り込む' %>
-   <%= link_to "絞り込みリセット", items_path, class: "ml-2 text-sm text-blue-500 underline" %>
+    <div>
+      <%= submit_tag "絞り込む", class: "bg-blue-500 text-white px-3 py-1 rounded" %>
+    </div>
+
+    <div>
+      <%= link_to "リセット", items_path, class: "text-blue-500 underline ml-2" %>
+    </div>
+
+  </div>
 <% end %>
-
 
 <% filters = [] %>
 <% filters << "カテゴリ: #{params[:category]}" if params[:category].present? %>
@@ -36,49 +57,23 @@
 <% filters << "値段: 高い順" if params[:sort] == 'price_desc' %>
 
 <% if filters.any? %>
-  <p>絞り込み条件：<%= filters.join(" / ") %></p>
+  <div class="border border-gray-400 rounded p-2 my-4 bg-white text-sm">
+    <strong>絞り込み条件：</strong><%= filters.join(" / ") %>
+  </div>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>画像</th>
-      <th>名前</th>
-      <th>ブランド</th>
-      <th>カテゴリ</th>
-      <th>カラー</th>
-      <th>キーワード</th>
-      <th>値段</th>
-      <th>説明</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-      <td>
-  <% if item.image.attached? %>
-    <%= link_to item_path(item) do %>
-      <%= image_tag item.image %>
-    <% end %>
-  <% else %>
-    <%= link_to item.name, item_path(item) %>
+<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+  <% @items.each do |item| %>
+    <div class="item-card mx-auto">
+      <% if item.image.attached? %>
+        <%= link_to item_path(item) do %>
+          <div class="item-image-wrapper">
+            <%= image_tag item.image, class: "item-image" %>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to item.name, item_path(item), class: "block text-center p-4 text-sm" %>
+      <% end %>
+    </div>
   <% end %>
-</td>
-        <td><%= item.name %></td>
-        <td><%= item.brand %></td>
-        <td><%= item.category %></td>
-        <td><%= item.color %></td>
-        <% keywords = [item.keyword1, item.keyword2].map { |k| k.to_s.strip.downcase }.reject(&:blank?).uniq %>
-        <td><%= keywords.any? ? keywords.join(' / ') : 'なし' %></td>
-        <td><%= number_to_currency(item.price, unit: "¥") %></td>
-        <td><%= item.description %></td>
-        <td>
-          <%= link_to '編集', edit_item_path(item) %> |
-          <%= button_to '削除', item_path(item), method: :delete, onclick: "return confirm('本当に削除しますか？');" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+</div>
