@@ -21,7 +21,7 @@
       <p style="color: red;"><%= alert %></p>
     <% end %>
     
-  <% if user_signed_in? %>
+  <% if user_signed_in? && controller_name != "how_tos" %>
     <p>こんにちは、<%= current_user.email %> さん！</p>
 
     <nav class="flex gap-4 p-2 bg-gray-100">

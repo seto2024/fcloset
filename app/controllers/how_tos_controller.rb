@@ -1,6 +1,6 @@
 class HowTosController < ApplicationController
   def show
-    # first_loginがtrueならfalseにして1回だけ表示
+    
     if current_user.first_login?
       current_user.update(first_login: false)
     else
