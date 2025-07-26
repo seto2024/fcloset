@@ -17,7 +17,7 @@ root 'home#index'
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get '/settings', to: 'settings#show', as: :settings
+  resource :settings, only: [:show, :update]
   
   get '/how_to', to: 'how_tos#show', as: :how_to
 
