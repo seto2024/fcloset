@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Theme.create!([
+  { name: 'デフォルト', css_class: 'theme-default' },
+  { name: 'パステル', css_class: 'theme-pastel' },
+  { name: 'ダーク', css_class: 'theme-dark' }
+])
+
