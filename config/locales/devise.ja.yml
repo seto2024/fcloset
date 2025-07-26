@@ -51,3 +51,5 @@ ja:
       not_found: 見つかりませんでした
       already_confirmed: すでに確認済みです
       not_locked: ロックされていません
+      taken: "はすでに使用されています"
+      not_saved: "は保存できませんでした"

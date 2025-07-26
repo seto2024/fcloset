@@ -1,6 +1,4 @@
 class HowTosController < ApplicationController
-  before_action :require_login
-
   def show
     # first_loginがtrueならfalseにして1回だけ表示
     if current_user.first_login?
@@ -10,3 +8,4 @@ class HowTosController < ApplicationController
     end
   end
 end
+

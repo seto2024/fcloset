@@ -8,8 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params.merge(first_login: true))  # ←ここ！
     if @user.save
-      auto_login(@user)
-      redirect_to items_path, notice: '新規登録しました！'
+   redirect_to login_path, notice: "登録が完了しました。ログインしてください。"
     else
       flash.now[:alert] = '登録に失敗しました'
       render :new, status: :unprocessable_entity

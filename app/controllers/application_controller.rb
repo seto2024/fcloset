@@ -1,15 +1,12 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  before_action :redirect_first_login
+  before_action :redirect_first_login, if: :user_signed_in?
 
   def after_sign_in_path_for(resource)
-    how_to_path
-  end
-
-  def require_login
-    unless user_signed_in?
-      flash[:alert] = "ログインしてください"
-      redirect_to new_user_session_path
+    if resource.first_login?
+      how_to_path
+    else
+      items_path
     end
   end
 
