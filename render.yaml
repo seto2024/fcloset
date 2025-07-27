@@ -8,3 +8,6 @@ services:
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
+    disks:
+      - name: storage
+        mountPath: /rails/storage
