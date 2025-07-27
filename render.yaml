@@ -11,3 +11,6 @@ services:
     disks:
       - name: storage
         mountPath: /rails/storage
+    build:
+      packages:
+        - imagemagick
