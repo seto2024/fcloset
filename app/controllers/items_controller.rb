@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :redirect_first_login
   before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @items = current_user&.items || []
