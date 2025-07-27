@@ -33,6 +33,10 @@
 <% end %>
 
           <%= f.file_field :image, accept: 'image/*', id: 'image_input', class: "block w-full border border-gray-300 rounded p-2 bg-gray-50" %>
+          <p class="text-xs text-gray-500 mt-2 text-center">
+            ※ iPhoneで撮影したHEIC形式の画像は、パソコンからは表示できないことがあります。<br>
+            表示させたい場合は画像を編集アプリ等で「.jpg」または「.png」形式に変換してください。
+          </p>
          <div id="preview_container" class="mt-4 relative w-fit mx-auto">
   <button type="button" id="remove_image_btn"
           class="hidden absolute top-0 right-0 bg-white text-red-600 rounded-full w-6 h-6 text-center shadow hover:bg-red-100 z-10">

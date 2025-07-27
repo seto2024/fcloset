@@ -8,9 +8,4 @@ services:
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
-    disks:
-      - name: storage
-        mountPath: /mnt/storage
-    build:
-      packages:
-        - imagemagick
+        

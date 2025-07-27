@@ -71,6 +71,3 @@ end
 gem "cssbundling-rails", "~> 1.4"
 
 gem "tailwindcss-rails", "~> 4.3"
-
-gem "mini_magick"
-gem "image_processing"
