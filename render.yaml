@@ -10,7 +10,7 @@ services:
         sync: false
     disks:
       - name: storage
-         mountPath: /mnt/storage
+        mountPath: /mnt/storage
     build:
       packages:
         - imagemagick
