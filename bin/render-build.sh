@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -o errexit
 
-mkdir -p /rails/storage 
+mkdir -p /mnt/storage
 
 bundle install
 bundle exec rake db:migrate
