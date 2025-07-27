@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
-  get 'settings/show'
+  resource :settings, only: [:show, :update]
 root 'home#index'
 
   get 'home/index'
