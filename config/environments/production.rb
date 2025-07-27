@@ -96,4 +96,5 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 # Allow requests from any host (required for Render)
 config.hosts.clear
+config.action_mailer.default_url_options = { host: 'fcloset.onrender.com' }
 end
