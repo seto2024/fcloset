@@ -23,7 +23,8 @@
           <% if @item.image.attached? %>
             <div class="mb-4">
               <p class="text-sm text-gray-600">現在の画像：</p>
-              <%= image_tag @item.image, class: "mx-auto w-[220px] h-auto max-h-[250px] rounded border object-contain" %>
+              <%= image_tag @item.image.variant(format: :jpeg, resize_to_limit: [400, 400]).processed, 
+                    class: "mx-auto w-[220px] h-auto max-h-[250px] rounded border object-contain" %>
             </div>
           <% end %>
 
