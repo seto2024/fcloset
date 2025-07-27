@@ -2,7 +2,7 @@
   <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
     <h2 class="text-xl font-bold text-center text-gray-800 mb-6">アイテム登録</h2>
 
-    <%= form_with(model: item, local: true, html: { multipart: true }) do |f| %>
+    <%= form_with(model: item, local: true, html: { multipart: true }) do |form| %>
       <% if item.errors.any? %>
         <div class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded">
           <h3 class="font-bold mb-2"><%= pluralize(item.errors.count, "件のエラー") %>があります:</h3>
