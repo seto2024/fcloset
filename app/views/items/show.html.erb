@@ -25,7 +25,7 @@
         <li><strong>キーワード：</strong><%= keywords.join(' / ') %></li>
       <% end %>
 
-      <li><strong>値段：</strong><%= number_to_currency(@item.price, unit: "¥") %></li>
+      <li><strong>値段：</strong><%= number_to_currency(@item.price, unit: "¥", precision: 0) %></li>
       <li><strong>説明：</strong><%= @item.description.presence || 'なし' %></li>
     </ul>
 

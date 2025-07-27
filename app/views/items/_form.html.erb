@@ -19,6 +19,14 @@
         <%# 画像 %>
         <div>
           <%= f.label :image, '画像（※名前または画像どちらか必須）', class: "block font-medium mb-1" %>
+           
+          <% if @item.image.attached? %>
+            <div class="mb-4">
+              <p class="text-sm text-gray-600">現在の画像：</p>
+              <%= image_tag @item.image, class: "mx-auto w-[220px] h-auto max-h-[250px] rounded border object-contain" %>
+            </div>
+          <% end %>
+
           <%= f.file_field :image, accept: 'image/*', id: 'image_input', class: "block w-full border border-gray-300 rounded p-2 bg-gray-50" %>
          <div id="preview_container" class="mt-4 relative w-fit mx-auto">
   <button type="button" id="remove_image_btn"
@@ -30,13 +38,12 @@
        class="hidden w-[220px] h-auto max-h-[250px] rounded border object-contain" />
 </div>
 
-        <%# 名前 %>
+        <%# アイテム名 %>
         <div>
-          <%= f.label :name, '名前（※名前または画像どちらか必須）', class: "block font-medium mb-1" %>
+          <%= f.label :name, 'アイテム名（※アイテム名または画像どちらか必須）', class: "block font-medium mb-1" %>
           <%= f.text_field :name, class: "w-full border border-gray-300 rounded p-2" %>
         </div>
 
-        <%# ブランド、カテゴリ、カラー、キーワードなど以下略（今のままでOK） %>
         <%# ブランド %>
         <div>
           <%= f.label :brand, 'ブランド', class: "block font-medium mb-1" %>
@@ -55,7 +62,7 @@
           <%= f.text_field :price, placeholder: '例：1500 (半角数字・カンマなし)', class: "w-full border border-gray-300 rounded p-2" %>
         </div>
 
-        <%# カラー、キーワード①②、説明 %>
+        <%# カラー、キーワード①② %>
         <div>
           <%= f.label :color, 'カラー', class: "block font-medium mb-1" %>
           <%= f.select :color, [['-- 選択なし --', '']] + Item::COLORS.map { |c| [c, c] }, { selected: @item.color }, class: "w-full border border-gray-300 rounded p-2 bg-white" %>
