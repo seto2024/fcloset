@@ -3,11 +3,9 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
-  resource :settings, only: [:show, :update]
 root 'home#index'
 
   get 'home/index'
-  get 'how_tos/show'
   mount ActiveStorage::Engine => "/rails/active_storage"
   resources :items
 
