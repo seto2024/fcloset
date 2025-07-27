@@ -2,7 +2,6 @@
   <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
     <h1 class="text-xl font-bold mb-6 text-center text-gray-800">設定</h1>
 
-    <p>テーマ一覧：<%= @themes.map(&:name).join(', ') %></p>
     <%= form_with model: current_user, scope: :user, url: settings_path, method: :patch, local: true do |f| %>
       <div class="mb-6">
         <%= f.label :theme_id, "テーマカラー", class: "block text-sm font-medium text-gray-700" %>
