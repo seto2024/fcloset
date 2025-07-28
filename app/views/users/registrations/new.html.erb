@@ -1,4 +1,4 @@
-<h1>新規登録</h1>
+<h1 class="text-xl font-bold text-center mb-6">新規登録</h1>
 
 <% if @user&.errors&.any? %>
   <div class="mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded text-sm">
@@ -12,22 +12,22 @@
 <% end %>
 
 <%= form_with model: @user, url: user_registration_path, local: true do |form| %>
-  <div>
-    <%= form.label :email %><br>
-    <%= form.email_field :email %>
+  <div class="mb-4">
+    <%= form.label :email, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.email_field :email, class: "mt-1 block w-full border border-gray-300 rounded p-2" %>
   </div>
 
-  <div>
-    <%= form.label :password %><br>
-    <%= form.password_field :password %>
+  <div class="mb-4">
+    <%= form.label :password, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.password_field :password, class: "mt-1 block w-full border border-gray-300 rounded p-2" %>
   </div>
 
-  <div>
-    <%= form.label :password_confirmation, "パスワード（確認）" %><br>
-    <%= form.password_field :password_confirmation %>
+  <div class="mb-6">
+    <%= form.label :password_confirmation, "パスワード（確認）", class: "block text-sm font-medium text-gray-700" %>
+    <%= form.password_field :password_confirmation, class: "mt-1 block w-full border border-gray-300 rounded p-2" %>
   </div>
 
-  <div>
-    <%= form.submit "登録する" %>
+  <div class="text-center">
+    <%= form.submit "登録する", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
   </div>
 <% end %>
