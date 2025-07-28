@@ -1,33 +1,42 @@
-<h1 class="text-xl font-bold text-center mb-6">新規登録</h1>
+<div class="min-h-screen flex items-center justify-center bg-white px-4">
+  <div class="bg-white border border-gray-300 rounded px-6 py-16 w-full max-w-xs shadow">
+    <h2 class="text-lg font-bold text-center text-black mb-6 mt-4">新規登録</h2>
 
-<% if @user&.errors&.any? %>
-  <div class="mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded text-sm">
-    <h2 class="font-bold mb-2"><%= pluralize(@user.errors.count, "件のエラー") %>が発生しました:</h2>
-    <ul class="list-disc pl-5">
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+    <% if @user&.errors&.any? %>
+      <div class="mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded text-sm">
+        <h2 class="font-bold mb-2"><%= pluralize(@user.errors.count, "件のエラー") %>が発生しました:</h2>
+        <ul class="list-disc pl-5">
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<%= form_with model: @user, url: user_registration_path, local: true do |form| %>
-  <div class="mb-4">
-    <%= form.label :email, class: "block text-sm font-medium text-gray-700" %>
-    <%= form.email_field :email, class: "mt-1 block w-full border border-gray-300 rounded p-2" %>
-  </div>
+    <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+      <div class="mb-4">
+        <%= f.label :email, "メールアドレス", class: "block text-gray-700 text-sm font-bold mb-1" %>
+        <%= f.email_field :email, class: "w-full border border-gray-300 rounded px-3 py-2 text-gray-700" %>
+      </div>
 
-  <div class="mb-4">
-    <%= form.label :password, class: "block text-sm font-medium text-gray-700" %>
-    <%= form.password_field :password, class: "mt-1 block w-full border border-gray-300 rounded p-2" %>
-  </div>
+      <div class="mb-4">
+        <%= f.label :password, "パスワード", class: "block text-gray-700 text-sm font-bold mb-1" %>
+        <%= f.password_field :password, class: "w-full border border-gray-300 rounded px-3 py-2 text-gray-700" %>
+      </div>
 
-  <div class="mb-6">
-    <%= form.label :password_confirmation, "パスワード（確認）", class: "block text-sm font-medium text-gray-700" %>
-    <%= form.password_field :password_confirmation, class: "mt-1 block w-full border border-gray-300 rounded p-2" %>
-  </div>
+      <div class="mb-6">
+        <%= f.label :password_confirmation, "パスワード（確認）", class: "block text-gray-700 text-sm font-bold mb-1" %>
+        <%= f.password_field :password_confirmation, class: "w-full border border-gray-300 rounded px-3 py-2 text-gray-700" %>
+      </div>
 
-  <div class="text-center">
-    <%= form.submit "登録する", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+      <div class="mb-6">
+        <%= f.submit "登録する", class: "w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" %>
+      </div>
+    <% end %>
+
+    <div class="text-center text-sm text-gray-600 space-y-1 mb-2">
+      <%= link_to "ログインはこちら", new_user_session_path, class: "text-blue-500 hover:underline block" %>
+      <%= link_to "パスワードを忘れた方はこちら", "#", class: "text-gray-400 cursor-not-allowed block", disabled: true %>
+    </div>
   </div>
-<% end %>
+</div>

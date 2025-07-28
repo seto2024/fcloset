@@ -53,3 +53,15 @@ ja:
       not_locked: ロックされていません
       taken: "はすでに使用されています"
       not_saved: "は保存できませんでした"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "メールアドレスを入力してください"
+            password:
+              too_short: "は%{count}文字以上で入力してください"
+              blank: "パスワードを入力してください"
+            password_confirmation:
+              confirmation: "パスワード（確認）が一致しません"
