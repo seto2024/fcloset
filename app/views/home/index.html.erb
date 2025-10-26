@@ -15,8 +15,8 @@
       <%= link_to "新規登録", new_user_registration_path, class: "px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600" %>
     </div>
 
-    <div>
-      <span class="text-sm text-gray-400 cursor-not-allowed">※パスワードリセットは現在ご利用いただけません</span>
+    <div class="text-sm text-gray-600">
+      <%= link_to "パスワードを忘れた方はこちら", new_user_password_path, class: "text-blue-500 hover:underline" %>
     </div>
   </div>
 </div>
