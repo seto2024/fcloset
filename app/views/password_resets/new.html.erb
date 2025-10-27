@@ -1,0 +1,11 @@
+<h1>パスワード再設定</h1>
+
+<%= form_with url: password_resets_path, local: true do |form| %>
+  <div>
+    <%= form.label :email, '登録したメールアドレス' %><br>
+    <%= form.email_field :email %>
+  </div>
+  <div>
+    <%= form.submit "送信する" %>
+  </div>
+<% end %>

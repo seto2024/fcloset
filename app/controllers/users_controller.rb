@@ -1,0 +1,24 @@
+class UsersController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create]
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params.merge(first_login: true))  # ←ここ！
+    if @user.save
+      auto_login(@user)
+      redirect_to items_path, notice: '新規登録しました！'
+    else
+      flash.now[:alert] = '登録に失敗しました'
+      render :new, status: :unprocessable_entity
+    end
+  end
+    
+  private
+    
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+end

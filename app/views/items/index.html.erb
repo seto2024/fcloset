@@ -1,0 +1,84 @@
+
+<%= form_with url: items_path, method: :get, local: true do %>
+
+  <label>カテゴリ：</label>
+  <%= select_tag :category, options_for_select(
+  [['-- カテゴリを選択 --', ''], ['トップス', 'トップス'], ['パンツ', 'パンツ'], ['スカート', 'スカート'], ['ワンピース', 'ワンピース'], ['コート', 'コート'], ['小物', '小物'], ['アクセサリー', 'アクセサリー'], ['バッグ', 'バッグ'], ['靴', '靴'], ['その他', 'その他']],
+  params[:category]
+) %>
+
+  <label>ブランド：</label>
+  <%= text_field_tag :brand, params[:brand] %>
+
+  <label>カラー：</label>
+  <%= select_tag :color, options_for_select(
+  [['-- カラーを選択 --', ''], ['白', '白'], ['黒', '黒'], ['グレー', 'グレー'], ['赤', '赤'], ['青', '青'], ['緑', '緑'], ['黄', '黄'], ['ピンク', 'ピンク'], ['ベージュ', 'ベージュ'], ['ブラウン', 'ブラウン'], ['その他', 'その他']],
+  params[:color]
+) %>
+
+  <label>キーワード：</label>
+  <%= text_field_tag :keyword, params[:keyword] %>
+
+  <label>値段順：</label>
+  <%= select_tag :sort, options_for_select([['', ''], ['安い順', 'price_asc'], ['高い順', 'price_desc']], params[:sort]) %>
+
+  <%= submit_tag '絞り込む' %>
+   <%= link_to "絞り込みリセット", items_path, class: "ml-2 text-sm text-blue-500 underline" %>
+<% end %>
+
+
+<% filters = [] %>
+<% filters << "カテゴリ: #{params[:category]}" if params[:category].present? %>
+<% filters << "ブランド: #{params[:brand]}" if params[:brand].present? %>
+<% filters << "カラー: #{params[:color]}" if params[:color].present? %>
+<% filters << "キーワード: #{params[:keyword]}" if params[:keyword].present? %>
+<% filters << "値段: 安い順" if params[:sort] == 'price_asc' %>
+<% filters << "値段: 高い順" if params[:sort] == 'price_desc' %>
+
+<% if filters.any? %>
+  <p>絞り込み条件：<%= filters.join(" / ") %></p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>名前</th>
+      <th>ブランド</th>
+      <th>カテゴリ</th>
+      <th>カラー</th>
+      <th>キーワード</th>
+      <th>値段</th>
+      <th>説明</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+      <td>
+  <% if item.image.attached? %>
+    <%= link_to item_path(item) do %>
+      <%= image_tag item.image %>
+    <% end %>
+  <% else %>
+    <%= link_to item.name, item_path(item) %>
+  <% end %>
+</td>
+        <td><%= item.name %></td>
+        <td><%= item.brand %></td>
+        <td><%= item.category %></td>
+        <td><%= item.color %></td>
+        <% keywords = [item.keyword1, item.keyword2].map { |k| k.to_s.strip.downcase }.reject(&:blank?).uniq %>
+        <td><%= keywords.any? ? keywords.join(' / ') : 'なし' %></td>
+        <td><%= number_to_currency(item.price, unit: "¥") %></td>
+        <td><%= item.description %></td>
+        <td>
+          <%= link_to '編集', edit_item_path(item) %> |
+          <%= button_to '削除', item_path(item), method: :delete, onclick: "return confirm('本当に削除しますか？');" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

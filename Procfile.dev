@@ -1,0 +1,3 @@
+web: bin/rails server -b 'ssl://0.0.0.0:3000?key=config/ssl/localhost.key&cert=config/ssl/localhost.crt'
+css: bin/rails tailwindcss:watch
+css: yarn build:css --watch
