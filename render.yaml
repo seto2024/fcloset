@@ -13,3 +13,6 @@ services:
           name: Fcloset_db
           property: connectionString
     migrationsCommand: "bundle exec rails db:migrate"
+
+databases:
+  - name: Fcloset_db
