@@ -6,52 +6,83 @@
     /* ▼ カード背景サイズ調整＆中央寄せ用 */
     .item-card {
       @apply w-[110px] h-[170px] sm:w-[120px] sm:h-[180px] md:w-[130px] md:h-[190px] lg:w-[140px] lg:h-[200px];
-      @apply bg-blue-100 rounded-md shadow-sm flex justify-center items-center mx-auto;
+      @apply rounded-md shadow-sm flex justify-center items-center mx-auto;
     }
-  
+
     /* ▼ 画像サイズ調整 */
     .item-image-wrapper {
       @apply w-[90px] h-[135px] overflow-hidden bg-gray-100 rounded;
     }
-  
+
     .item-image {
       @apply w-full h-full object-cover;
     }
-  
+
     @screen sm {
       .item-image-wrapper {
         @apply w-[100px] h-[145px];
       }
     }
-  
+
     @screen md {
       .item-image-wrapper {
         @apply w-[110px] h-[155px];
       }
     }
-  
+
     @screen lg {
       .item-image-wrapper {
         @apply w-[120px] h-[165px];
       }
     }
-  }
+    .theme-pastel input,
+    .theme-pastel select,
+    .theme-pastel textarea {
+      @apply bg-pink-100 border-pink-200;
+    }
+}
+
   @layer utilities {
     /* ▼ テーマ：デフォルト（薄い青） */
     .theme-default {
       @apply bg-blue-50 text-gray-800;
     }
-  
+    .theme-default .item-card {
+        @apply bg-blue-200;
+      }
+    .theme-default .page-wrapper {
+        @apply bg-blue-50;
+      }
+      .theme-default .nav-bar {
+        @apply bg-blue-100;
+      }
+      
+
     /* ▼ テーマ：パステル（ピンク） */
-    .theme-pastel {
-      @apply bg-pink-50 text-gray-700;
+    .theme-pastel input,
+    .theme-pastel select,
+    .theme-pastel textarea {
+      @apply bg-pink-100 border-pink-200;
     }
-  
+
+    .theme-pastel .item-card {
+        @apply bg-pink-200;
+      }
+      .theme-pastel .page-wrapper {
+        @apply bg-pink-50;
+      }
+      .theme-pastel .nav-bar {
+        @apply bg-pink-100;
+      }
+      
+
     /* ▼ テーマ：ダーク（濃いグレー背景） */
-    .theme-dark {
-      @apply bg-gray-900 text-gray-100;
+    .theme-dark input,
+    .theme-dark select,
+    .theme-dark textarea {
+      @apply bg-gray-800 border-gray-700;
     }
-  
+
     .theme-dark h1,
     .theme-dark h2,
     .theme-dark h3,
@@ -62,5 +93,15 @@
     .theme-dark textarea {
       @apply text-gray-100;
     }
+    .theme-dark .item-card {
+        @apply bg-gray-400;
+      }
+    .theme-dark .page-wrapper {
+        @apply bg-gray-700;
+      }
+      .theme-dark .nav-bar {
+        @apply bg-gray-200;
+      }
+    
   }
 

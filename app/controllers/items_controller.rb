@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :redirect_first_login
   before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @items = current_user&.items || []
@@ -14,10 +15,11 @@ class ItemsController < ApplicationController
       @items = @items.where("LOWER(keyword1) = ? OR LOWER(keyword2) = ?", keyword, keyword)
     end
   
+  
     if params[:sort] == 'price_asc'
       @items = @items.order(price: :asc)
     elsif params[:sort] == 'price_desc'
-      @items = @items.order(price: :desc)
+      @items = @items.order(Arel.sql('price DESC NULLS LAST'))
     end
   end
 

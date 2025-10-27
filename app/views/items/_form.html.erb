@@ -1,5 +1,5 @@
-<div class="min-h-screen bg-blue-50 flex items-center justify-center py-8">
-  <div class="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
+<div class="page-wrapper min-h-screen py-12">
+  <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
     <h2 class="text-xl font-bold text-center text-gray-800 mb-6">アイテム登録</h2>
 
     <%= form_with(model: item, local: true, html: { multipart: true }) do |f| %>
@@ -19,7 +19,24 @@
         <%# 画像 %>
         <div>
           <%= f.label :image, '画像（※名前または画像どちらか必須）', class: "block font-medium mb-1" %>
+           
+          <% if @item.image.attached? %>
+  <div class="mb-4">
+    <p class="text-sm text-gray-600">現在の画像：</p>
+    <% begin %>
+      <%= image_tag @item.image.variant(resize_to_limit: [400, 400]).processed,
+        class: "mx-auto w-[220px] h-auto max-h-[250px] rounded border object-contain" %>
+    <% rescue => e %>
+      <p class="text-red-500 text-sm text-center">画像が表示できません（形式が非対応かもしれません）</p>
+    <% end %>
+  </div>
+<% end %>
+
           <%= f.file_field :image, accept: 'image/*', id: 'image_input', class: "block w-full border border-gray-300 rounded p-2 bg-gray-50" %>
+          <p class="text-xs text-gray-500 mt-2 text-center">
+            ※ iPhoneで撮影したHEIC形式の画像は、パソコンからは表示できないことがあります。<br>
+            表示させたい場合は画像を編集アプリ等で「.jpg」または「.png」形式に変換してください。
+          </p>
          <div id="preview_container" class="mt-4 relative w-fit mx-auto">
   <button type="button" id="remove_image_btn"
           class="hidden absolute top-0 right-0 bg-white text-red-600 rounded-full w-6 h-6 text-center shadow hover:bg-red-100 z-10">
@@ -30,13 +47,12 @@
        class="hidden w-[220px] h-auto max-h-[250px] rounded border object-contain" />
 </div>
 
-        <%# 名前 %>
+        <%# アイテム名 %>
         <div>
-          <%= f.label :name, '名前（※名前または画像どちらか必須）', class: "block font-medium mb-1" %>
+          <%= f.label :name, 'アイテム名（※アイテム名または画像どちらか必須）', class: "block font-medium mb-1" %>
           <%= f.text_field :name, class: "w-full border border-gray-300 rounded p-2" %>
         </div>
 
-        <%# ブランド、カテゴリ、カラー、キーワードなど以下略（今のままでOK） %>
         <%# ブランド %>
         <div>
           <%= f.label :brand, 'ブランド', class: "block font-medium mb-1" %>
@@ -55,7 +71,7 @@
           <%= f.text_field :price, placeholder: '例：1500 (半角数字・カンマなし)', class: "w-full border border-gray-300 rounded p-2" %>
         </div>
 
-        <%# カラー、キーワード①②、説明 %>
+        <%# カラー、キーワード①② %>
         <div>
           <%= f.label :color, 'カラー', class: "block font-medium mb-1" %>
           <%= f.select :color, [['-- 選択なし --', '']] + Item::COLORS.map { |c| [c, c] }, { selected: @item.color }, class: "w-full border border-gray-300 rounded p-2 bg-white" %>

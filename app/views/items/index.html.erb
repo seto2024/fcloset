@@ -1,3 +1,4 @@
+<div class="page-wrapper min-h-screen py-12">
 <%= form_with url: items_path, method: :get, local: true do %>
   <div class="flex flex-wrap justify-center items-end gap-2 mt-4 mb-6 text-sm">
 
@@ -16,12 +17,10 @@
     </div>
 
     <div>
-      <%= select_tag :color,
-        options_for_select(
-          ['-- カラー --', ''] + Item::COLORS,
-          params[:color]
-        ),
-        class: "border border-gray-300 rounded px-2 py-1 w-36" %>
+    <%= select_tag :color,
+    options_for_select(Item::COLORS, params[:color]),
+    prompt: '-- カラー --',
+    class: "border border-gray-300 rounded px-2 py-1 w-36" %>
     </div>
 
     <div>

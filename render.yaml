@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: fcloset
+    env: ruby
+    buildCommand: "bundle install && rails db:migrate && rails db:seed"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    plan: free
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
