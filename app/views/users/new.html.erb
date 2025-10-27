@@ -1,9 +1,9 @@
 <h1>新規登録</h1>
 
-<% if @user.errors.any? %>
-  <div class="error-messages">
-    <h2><%= pluralize(@user.errors.count, "件のエラー") %>が発生しました:</h2>
-    <ul>
+<% if @user&.errors&.any? %>
+  <div class="mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded text-sm">
+    <h2 class="font-bold mb-2"><%= pluralize(@user.errors.count, "件のエラー") %>が発生しました:</h2>
+    <ul class="list-disc pl-5">
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>

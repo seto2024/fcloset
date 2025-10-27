@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+
+  def create
+    @user = User.new(sign_up_params)
+    if @user.save
+      redirect_to after_sign_up_path_for(@user), notice: "登録が完了しました"
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   protected
@@ -18,7 +27,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def new
   #   super
   # end
+  private
 
+  def sign_up_params
+    params.require(:user).permit(:email, :password, :password_confirmation)
+  end
   # POST /resource
   # def create
   #   super

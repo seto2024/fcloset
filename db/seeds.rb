@@ -7,9 +7,14 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-Theme.create!([
+themes = [
   { name: 'デフォルト', css_class: 'theme-default' },
   { name: 'パステル', css_class: 'theme-pastel' },
   { name: 'ダーク', css_class: 'theme-dark' }
-])
+]
 
+themes.each do |theme|
+  Theme.find_or_create_by!(name: theme[:name]) do |t|
+    t.css_class = theme[:css_class]
+  end
+end
