@@ -14,3 +14,4 @@ services:
           property: connectionString
     migrations:
       runCommand: "bundle exec rails db:migrate"
+
