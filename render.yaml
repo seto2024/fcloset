@@ -12,6 +12,3 @@ services:
         fromDatabase:
           name: Fcloset_db
           property: connectionString
-    migrations:
-      runCommand: "bundle exec rails db:migrate"
-
