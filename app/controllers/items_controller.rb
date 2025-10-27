@@ -60,16 +60,22 @@ class ItemsController < ApplicationController
   private
 
   def set_item
-    @item = current_user.items.find_by(id: params[:id])
+    # まずは、自分のアイテムを探す
+    @item = current_user.items.find_by(id: params[:id]) if user_signed_in?
+  
+    # 自分のアイテムが見つからなければ、publicなアイテムを探す
+    @item ||= Item.find_by(id: params[:id], public: true)
+  
+    # それでも見つからなければアクセス拒否
     unless @item
-      redirect_to items_path, alert: "権限がありません"
+      redirect_to root_path, alert: "このアイテムを見る権限がありません"
     end
   end
 
   def item_params
     params.require(:item).permit(
       :image, :name, :description, :brand, :category,
-      :price, :color, :keyword1, :keyword2
+      :price, :color, :keyword1, :keyword2, :public
     )
   end
 

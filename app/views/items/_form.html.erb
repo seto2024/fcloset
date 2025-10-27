@@ -93,6 +93,12 @@
         </div>
       </div>
 
+<%# シェアクローゼット公開フラグ %>
+        <div>
+          <%= f.label :public, 'シェアクローゼットに公開する', class: "inline-flex items-center" %>
+          <%= f.check_box :public, class: "ml-2" %>
+        </div>
+
       <%# --- ボタン --- %>
       <div class="mt-6 text-center">
         <%= f.submit "登録する", class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition" %>

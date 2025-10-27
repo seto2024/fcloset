@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fcloset - Share Closet</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body class="theme-default">
+
+    <nav class="flex justify-between items-center px-4 py-2 bg-gray-100 shadow">
+      <div>
+        <%= link_to "🏠 トップへ", root_path, class: "text-blue-600 font-semibold" %>
+      </div>
+    </nav>
+
+    <%= yield %>
+
+  </body>
+</html>

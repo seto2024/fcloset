@@ -20,8 +20,9 @@ root 'home#index'
   resource :settings, only: [:show, :update]
   
   get '/how_to', to: 'how_tos#show', as: :how_to
-
   get '/welcome', to: 'how_tos#welcome', as: :welcome
+
+  get '/share_closet', to: 'closets#share', as: :share_closet
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
