@@ -1,8 +1,11 @@
-test:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: test
-  pool: 5
+  host: localhost
   username: postgres
   password: password
-  host: localhost
+  pool: 5
+
+test:
+  <<: *default
+  database: test
