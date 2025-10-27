@@ -13,12 +13,13 @@ services:
           name: Fcloset_db
           property: connectionString
 
-  - type: migrate
+  - type: web
     name: fcloset-migrations
     env: ruby
     plan: free
     buildCommand: "bundle install"
     startCommand: "bundle exec rails db:migrate"
+    autoDeploy: false # ←これで勝手に動かないようにできる（任意）
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
@@ -29,4 +30,3 @@ services:
 
 databases:
   - name: Fcloset_db
-  
