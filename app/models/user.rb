@@ -4,4 +4,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
+  belongs_to :theme, optional: true
 end

@@ -36,4 +36,31 @@
       }
     }
   }
+  @layer utilities {
+    /* ▼ テーマ：デフォルト（薄い青） */
+    .theme-default {
+      @apply bg-blue-50 text-gray-800;
+    }
   
+    /* ▼ テーマ：パステル（ピンク） */
+    .theme-pastel {
+      @apply bg-pink-50 text-gray-700;
+    }
+  
+    /* ▼ テーマ：ダーク（濃いグレー背景） */
+    .theme-dark {
+      @apply bg-gray-900 text-gray-100;
+    }
+  
+    .theme-dark h1,
+    .theme-dark h2,
+    .theme-dark h3,
+    .theme-dark p,
+    .theme-dark label,
+    .theme-dark select,
+    .theme-dark input,
+    .theme-dark textarea {
+      @apply text-gray-100;
+    }
+  }
+

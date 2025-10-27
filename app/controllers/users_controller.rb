@@ -14,6 +14,22 @@ class UsersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+  
+  def edit
+    @user = current_user
+    @themes = Theme.all
+  end
+
+  def update
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to edit_user_path, notice: "テーマを変更しました！"
+    else
+      @themes = Theme.all
+      flash.now[:alert] = '更新に失敗しました'
+      render :edit, status: :unprocessable_entity
+    end
+  end
     
   private
     
