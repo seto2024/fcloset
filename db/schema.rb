@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_27_192216) do
+ActiveRecord::Schema[7.1].define(version: 2025_10_27_105802) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_27_192216) do
     t.string "keyword1"
     t.string "keyword2"
     t.bigint "user_id", null: false
+    t.boolean "public"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 

@@ -1,21 +1,20 @@
 class ItemsController < ApplicationController
-  before_action :redirect_first_login
-  before_action :set_item, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :redirect_first_login
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = current_user&.items || []
-  
+    @items = current_user.items
+
     @items = @items.where(category: params[:category]) if params[:category].present?
     @items = @items.where(brand: params[:brand]) if params[:brand].present?
     @items = @items.where(color: params[:color]) if params[:color].present?
-  
+
     if params[:keyword].present?
       keyword = params[:keyword].downcase
       @items = @items.where("LOWER(keyword1) = ? OR LOWER(keyword2) = ?", keyword, keyword)
     end
-  
-  
+
     if params[:sort] == 'price_asc'
       @items = @items.order(price: :asc)
     elsif params[:sort] == 'price_desc'
@@ -28,7 +27,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = current_user.items.build(item_params) 
+    @item = current_user.items.build(item_params)
     if @item.save
       current_user.update_column(:first_login, false) if current_user.first_login?
       redirect_to items_path, notice: "アイテムを登録しました"
@@ -39,7 +38,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
@@ -62,17 +60,28 @@ class ItemsController < ApplicationController
   private
 
   def set_item
-    @item = Item.find(params[:id])
+    # まずは、自分のアイテムを探す
+    @item = current_user.items.find_by(id: params[:id]) if user_signed_in?
+  
+    # 自分のアイテムが見つからなければ、publicなアイテムを探す
+    @item ||= Item.find_by(id: params[:id], public: true)
+  
+    # それでも見つからなければアクセス拒否
+    unless @item
+      redirect_to root_path, alert: "このアイテムを見る権限がありません"
+    end
   end
 
   def item_params
-    params.require(:item).permit(:image, :name, :description, :brand, :category, :price, :color, :keyword1, :keyword2 )
+    params.require(:item).permit(
+      :image, :name, :description, :brand, :category,
+      :price, :color, :keyword1, :keyword2, :public
+    )
   end
 
   def redirect_first_login
     return unless user_signed_in? && current_user.first_login?
     return if request.path == settings_path || request.path == destroy_user_session_path
-
     redirect_to settings_path
   end
 end

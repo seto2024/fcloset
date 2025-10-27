@@ -1,31 +1,32 @@
-<div class="max-w-md mx-auto px-4 py-8 bg-white rounded-lg shadow-md text-gray-800 text-center">
+<div class="max-w-md mx-auto px-4 py-8 bg-white rounded-lg shadow-md text-gray-800 flex flex-col min-h-screen">
 
-<h1 class="text-3xl font-extrabold text-black mb-6">ようこそ！Fclosetへ</h1>
+  <div class="flex-1">
+    <h1 class="text-3xl font-extrabold text-center mb-6">🔰Fclosetの使い方🔰</h1>
 
-<p class="text-sm mb-4 leading-relaxed">
-Fcloset（フクローゼット）は<br>
-<span class="font-semibold">あなたのクローゼットをまるごとスマホの中に。</span><br>
-ファッションアイテムの在庫管理ができるアプリです。
-</p>
+    <div class="space-y-6 text-sm leading-relaxed">
+      <div>
+        <h2 class="font-bold mb-1 text-lg text-pink-600">① アイテムを登録しよう</h2>
+        <p>「アイテム登録」ページから、お持ちのファッションアイテムの画像・名前・カテゴリ・カラーなどを登録できます。</p>
+      </div>
 
-  <p class="font-semibold mb-2">こんなお悩み、ありませんか？</p>
+      <div>
+        <h2 class="font-bold mb-1 text-lg text-pink-600">② 登録したアイテムを一覧で見よう</h2>
+        <p>「アイテム一覧」ページでは、登録したアイテムを画像付きで確認できます。カテゴリやカラーで絞り込みも可能です。</p>
+      </div>
 
-  <div class="text-sm mb-6 space-y-1 ">
-    <p>💭 持ってるアイテムが把握できていない…</p>
-    <p>💭 持っている服に合わないアイテムを買ってしまい失敗…</p>
-    <p>💭 自分の持っているファッションアイテムを可視化したい</p>
+      <div>
+        <h2 class="font-bold mb-1 text-lg text-pink-600">③ 自分のテーマでクローゼットを彩ろう</h2>
+        <p>「設定」ページから、アプリのテーマカラーを選んで自分好みにカスタマイズできます。</p>
+      </div>
+
+      <div>
+        <h2 class="font-bold mb-1 text-lg text-pink-600">④ アイテム詳細を確認・編集・削除</h2>
+        <p>アイテム画像をクリックすると、詳細ページが開きます。編集・削除もそこから可能です。</p>
+      </div>
+    </div>
   </div>
 
-  <p class="text-sm mb-6">
-  Fclosetがあれば、<br>
-  <span class="font-semibold text-pink-600">あなたのファッションがもっと自由に、もっと楽しく</span><br>
-  なります。
-</p>
-
-  <h2 class="text-lg font-bold mb-4">さあ、自分だけのクローゼットを完成させよう！</h2>
-
-  <div class="max-w-md mx-auto px-4 py-8 bg-white rounded-lg text-gray-800 text-center min-h-screen overflow-visible">
- <%= link_to "さっそくアイテムを登録する", new_item_path,
-  class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-md inline-block transition duration-200" %>
-</div>
+  <div class="text-center mt-12">
+    <%= link_to "アイテムを登録する", new_item_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-md transition duration-200 inline-block" %>
+  </div>
 </div>

@@ -29,14 +29,22 @@
       <li><strong>説明：</strong><%= @item.description.presence || 'なし' %></li>
     </ul>
 
+    <% if user_signed_in? && current_user == @item.user %>
     <div class="mt-6 flex justify-center gap-4">
-  <%= link_to '編集する', edit_item_path(@item), class: 'bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 px-4 rounded' %>
+      <%= link_to '編集する', edit_item_path(@item), class: 'bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 px-4 rounded' %>
+  
+      <%= button_to '削除する', item_path(@item),
+        method: :delete,
+        form: { data: { turbo_confirm: "本当に削除しますか？" } },
+        class: 'bg-red-500 hover:bg-red-600 text-white text-sm py-2 px-4 rounded' %>
+    </div>
+  <% end %>
 
-  <%= button_to '削除する', item_path(@item),
-    method: :delete,
-    form: { data: { turbo_confirm: "本当に削除しますか？" } },
-    class: 'bg-red-500 hover:bg-red-600 text-white text-sm py-2 px-4 rounded' %>
-</div>
+  <% if params[:from] == "share" %>
+  <div class="mt-6 text-center">
+    <%= link_to "← シェアクローゼットへ戻る", share_closet_path, class: "text-blue-600 underline text-sm" %>
+  </div>
+<% end %>
 
   </div>
 </div>

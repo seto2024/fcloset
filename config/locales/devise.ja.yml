@@ -52,8 +52,13 @@ ja:
       already_confirmed: すでに確認済みです
       not_locked: ロックされていません
       taken: "はすでに使用されています"
-      not_saved: "は保存できませんでした"
+      not_saved: "%{count}件のエラーがあります。"
+      confirmation: "が一致しません"
   activerecord:
+    attributes:
+      user:
+        password: "パスワード"
+        password_confirmation: "パスワード（確認）"
     errors:
       models:
         user:
@@ -61,9 +66,9 @@ ja:
             email:
               blank: "メールアドレスを入力してください"
             password:
-              blank: "パスワードを入力してください"
-              too_short: "パスワードは%{count}文字以上で入力してください"
+              blank: "を入力してください"
+              too_short: "は%{count}文字以上で入力してください"
             password_confirmation:
-              confirmation: "パスワード（確認）が一致しません"
-              blank: "パスワード（確認）を入力してください"
+              confirmation: "が一致しません"
+              blank: "を入力してください"
               

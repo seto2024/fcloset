@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  before_action :redirect_first_login, if: :user_signed_in?
 
   def after_sign_in_path_for(resource)
     if resource.first_login?
-      how_to_path
+      resource.update(first_login: false)
+      welcome_path
     else
       items_path
     end

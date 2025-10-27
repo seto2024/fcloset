@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    registrations: "users/registrations"
+    sessions: 'users/sessions',
+    registrations: "users/registrations",
+    passwords: "users/passwords"
   }
 
 root 'home#index'
@@ -18,6 +20,9 @@ root 'home#index'
   resource :settings, only: [:show, :update]
   
   get '/how_to', to: 'how_tos#show', as: :how_to
+  get '/welcome', to: 'how_tos#welcome', as: :welcome
+
+  get '/share_closet', to: 'closets#share', as: :share_closet
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

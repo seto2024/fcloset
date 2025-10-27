@@ -22,14 +22,26 @@
       <p style="color: red;"><%= alert %></p>
     <% end %>
     
-  <% if user_signed_in? && controller_name != "how_tos" %>
+  <% if user_signed_in? %>
     <p>こんにちは、<%= current_user.email %> さん！</p>
 
     <nav class="nav-bar flex gap-4 p-2">
-      <%= link_to '設定', settings_path, class: "text-blue-600" %>
-      <%= link_to 'アイテム一覧', items_path, class: "text-blue-600" %>
-      <%= link_to 'アイテム登録', new_item_path, class: "text-blue-600" %>
-     </nav>
+    <% if controller_name == 'closets' && action_name == 'share' %>
+      <!-- シェアクローゼット表示時だけ -->
+      <%= link_to '← マイクローゼットへ戻る', items_path, class: "text-blue-600" %>
+    <% else %>
+      <!-- 通常のナビゲーション -->
+      <div class="flex gap-4">
+        <%= link_to '設定', settings_path, class: "text-blue-600" %>
+        <%= link_to 'アイテム一覧', items_path, class: "text-blue-600" %>
+        <%= link_to 'アイテム登録', new_item_path, class: "text-blue-600" %>
+      </div>
+  
+      <div>
+        <%= link_to '？', how_to_path, title: "このアプリの使い方を見る", class: "text-blue-600 text-base no-underline cursor-help" %>
+      </div>
+    <% end %>
+  </nav>
   <% end %>
 
     <%= yield %>
