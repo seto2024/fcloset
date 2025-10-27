@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
+    sessions: 'users/sessions',
     registrations: "users/registrations",
     passwords: "users/passwords"
   }
@@ -19,6 +20,8 @@ root 'home#index'
   resource :settings, only: [:show, :update]
   
   get '/how_to', to: 'how_tos#show', as: :how_to
+
+  get '/welcome', to: 'how_tos#welcome', as: :welcome
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

@@ -15,8 +15,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   # 登録後にログインさせずにログイン画面に飛ばす
-  def after_sign_up_path_for(resource)
-    new_user_session_path # ログインページへ
+  ddef after_sign_up_path_for(resource)
+    resource.update(first_login: false)
+    welcome_path
   end
 
   # ↑ これだけでもOKだけど、念のため自動ログインそのものもスキップしたいなら:
