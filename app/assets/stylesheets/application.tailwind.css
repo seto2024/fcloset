@@ -1,1 +1,39 @@
-@import "tailwindcss";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer components {
+    /* ▼ カード背景サイズ調整＆中央寄せ用 */
+    .item-card {
+      @apply w-[110px] h-[170px] sm:w-[120px] sm:h-[180px] md:w-[130px] md:h-[190px] lg:w-[140px] lg:h-[200px];
+      @apply bg-blue-100 rounded-md shadow-sm flex justify-center items-center mx-auto;
+    }
+  
+    /* ▼ 画像サイズ調整 */
+    .item-image-wrapper {
+      @apply w-[90px] h-[135px] overflow-hidden bg-gray-100 rounded;
+    }
+  
+    .item-image {
+      @apply w-full h-full object-cover;
+    }
+  
+    @screen sm {
+      .item-image-wrapper {
+        @apply w-[100px] h-[145px];
+      }
+    }
+  
+    @screen md {
+      .item-image-wrapper {
+        @apply w-[110px] h-[155px];
+      }
+    }
+  
+    @screen lg {
+      .item-image-wrapper {
+        @apply w-[120px] h-[165px];
+      }
+    }
+  }
+  

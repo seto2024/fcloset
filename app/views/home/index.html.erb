@@ -1,15 +1,22 @@
-<h1 class="text-3xl font-bold text-center mb-4">Fcloset</h1>
+<div class="min-h-screen flex flex-col justify-center items-center text-center px-4">
+  <div>
+    <h1 class="text-3xl font-bold mb-4">Fcloset</h1>
 
-<p class="text-center mb-6">
-  Fcloset（フクローゼット）は、<strong>ファッションアイテムの在庫管理</strong>ができるアプリです。<br>
-  自分のクローゼットを「見える化」してファッションをもっと楽しく！
+    <p class="mb-6 text-center">
+  Fcloset（フクローゼット）は、<br>
+  <strong>ファッションアイテムの在庫管理</strong><br>
+  ができるアプリです。<br>
+  自分のクローゼットを「見える化」して<br>
+  ファッションをもっと楽しく！
 </p>
 
-<div class="flex justify-center gap-4 mb-8">
-  <%= link_to "ログイン", login_path, class: "px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
-  <%= link_to "新規登録", signup_path, class: "px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600" %>
-</div>
+    <div class="flex justify-center gap-4 mb-8">
+      <%= link_to "ログイン", new_user_session_path, class: "px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600" %>
+    </div>
 
-<div class="text-center">
-  <%= link_to "パスワードを忘れた方はこちら", new_password_reset_path, class: "text-sm text-gray-600 underline hover:text-gray-800" %>
+    <div>
+      <%= link_to "パスワードを忘れた方はこちら", new_user_password_path, class: "text-sm text-gray-600 underline hover:text-gray-800" %>
+    </div>
+  </div>
 </div>

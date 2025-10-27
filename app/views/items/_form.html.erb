@@ -1,85 +1,86 @@
-<div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
-  <h2 class="text-xl font-bold mb-4 text-center">アイテム登録</h2>
+<div class="min-h-screen bg-blue-50 flex items-center justify-center py-8">
+  <div class="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-xl font-bold text-center text-gray-800 mb-6">アイテム登録</h2>
 
-  <%= form_with(model: item, local: true, html: { multipart: true }) do |f| %>
-    <% if item.errors.any? %>
-      <div class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded">
-        <h3 class="font-bold mb-2"><%= pluralize(item.errors.count, "件のエラー") %>があります:</h3>
-        <ul class="list-disc pl-5">
-          <% item.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
+    <%= form_with(model: item, local: true, html: { multipart: true }) do |f| %>
+      <% if item.errors.any? %>
+        <div class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded">
+          <h3 class="font-bold mb-2"><%= pluralize(item.errors.count, "件のエラー") %>があります:</h3>
+          <ul class="list-disc pl-5">
+            <% item.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%# --- 各フィールド --- %>
+      <div class="space-y-4 text-sm text-gray-700">
+        <%# 画像 %>
+        <div>
+          <%= f.label :image, '画像（※名前または画像どちらか必須）', class: "block font-medium mb-1" %>
+          <%= f.file_field :image, accept: 'image/*', id: 'image_input', class: "block w-full border border-gray-300 rounded p-2 bg-gray-50" %>
+         <div id="preview_container" class="mt-4 relative w-fit mx-auto">
+  <button type="button" id="remove_image_btn"
+          class="hidden absolute top-0 right-0 bg-white text-red-600 rounded-full w-6 h-6 text-center shadow hover:bg-red-100 z-10">
+    ×
+  </button>
+
+  <img id="preview_image" src="#" alt="プレビュー"
+       class="hidden w-[220px] h-auto max-h-[250px] rounded border object-contain" />
+</div>
+
+        <%# 名前 %>
+        <div>
+          <%= f.label :name, '名前（※名前または画像どちらか必須）', class: "block font-medium mb-1" %>
+          <%= f.text_field :name, class: "w-full border border-gray-300 rounded p-2" %>
+        </div>
+
+        <%# ブランド、カテゴリ、カラー、キーワードなど以下略（今のままでOK） %>
+        <%# ブランド %>
+        <div>
+          <%= f.label :brand, 'ブランド', class: "block font-medium mb-1" %>
+          <%= f.text_field :brand, class: "w-full border border-gray-300 rounded p-2" %>
+        </div>
+
+        <%# カテゴリ %>
+        <div>
+          <%= f.label :category, 'カテゴリ', class: "block font-medium mb-1" %>
+          <%= f.select :category, [['-- 選択なし --', '']] + Item::CATEGORIES.map { |c| [c, c] }, { selected: @item.category }, class: "w-full border border-gray-300 rounded p-2 bg-white" %>
+        </div>
+
+        <%# 値段 %>
+        <div>
+          <%= f.label :price, '値段', class: "block font-medium mb-1" %>
+          <%= f.text_field :price, placeholder: '例：1500 (半角数字・カンマなし)', class: "w-full border border-gray-300 rounded p-2" %>
+        </div>
+
+        <%# カラー、キーワード①②、説明 %>
+        <div>
+          <%= f.label :color, 'カラー', class: "block font-medium mb-1" %>
+          <%= f.select :color, [['-- 選択なし --', '']] + Item::COLORS.map { |c| [c, c] }, { selected: @item.color }, class: "w-full border border-gray-300 rounded p-2 bg-white" %>
+        </div>
+
+        <div>
+          <%= f.label :keyword1, 'キーワード①', class: "block font-medium mb-1" %>
+          <%= f.text_field :keyword1, class: "w-full border border-gray-300 rounded p-2" %>
+        </div>
+
+        <div>
+          <%= f.label :keyword2, 'キーワード②', class: "block font-medium mb-1" %>
+          <%= f.text_field :keyword2, class: "w-full border border-gray-300 rounded p-2" %>
+        </div>
+
+        <div>
+          <%= f.label :description, '説明', class: "block font-medium mb-1" %>
+          <%= f.text_area :description, class: "w-full border border-gray-300 rounded p-2", rows: 3 %>
+        </div>
+      </div>
+
+      <%# --- ボタン --- %>
+      <div class="mt-6 text-center">
+        <%= f.submit "登録する", class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition" %>
       </div>
     <% end %>
-
-   <%# 画像 %>
-   <div class="mb-4">
-   <%= f.label :image, '画像（※名前または画像どちらか必須）', class: "block font-medium mb-1" %>
-   <%= f.file_field :image, accept: 'image/*', id: 'image_input', class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" %>
- 
-   <div id="preview_container" class="mt-4 flex justify-center">
-    <img
-    id="preview_image"
-    src="#"
-    alt="プレビュー"
-    class="hidden rounded border object-contain
-           w-[160px] sm:w-[180px] md:w-[220px] lg:w-[250px] h-auto max-h-[250px]" />
-   </div>
- </div>
-
-
-    <%# 名前 %>
-    <div class="mb-4">
-      <%= f.label :name, '名前（※名前または画像どちらか必須）', class: "block font-medium mb-1" %>
-      <%= f.text_field :name, class: "mt-1 block w-full border border-gray-300 rounded bg-white p-2" %>
-    </div>
-
-    <%# ブランド %>
-    <div class="mb-4">
-      <%= f.label :brand, 'ブランド', class: "block font-medium mb-1" %>
-      <%= f.text_field :brand, class: "mt-1 block w-full border border-gray-300 rounded bg-white p-2" %>
-    </div>
-
-    <%# カテゴリ %>
-    <div class="mb-4">
-      <%= f.label :category, 'カテゴリ', class: "block font-medium mb-1" %>
-      <%= f.select :category, [['-- 選択なし --', '']] + Item::CATEGORIES.map { |c| [c, c] }, { selected: @item.category }, class: "mt-1 block w-full border border-gray-300 rounded bg-white p-2" %>
-    </div>
-
-    <%# 値段 %>
-    <div class="mb-4">
-      <%= f.label :price, '値段', class: "block font-medium mb-1" %>
-      <%= f.text_field :price, placeholder: '例：1500 (半角数字・カンマなし)', class: "mt-1 block w-full border border-gray-300 rounded bg-white p-2" %>
-    </div>
-
-    <%# カラー %>
-    <div class="mb-4">
-      <%= f.label :color, 'カラー', class: "block font-medium mb-1" %>
-      <%= f.select :color, [['-- 選択なし --', '']] + Item::COLORS.map { |c| [c, c] }, { selected: @item.color }, class: "mt-1 block w-full border border-gray-300 rounded bg-white p-2" %>
-    </div>
-
-    <%# キーワード① %>
-    <div class="mb-4">
-      <%= f.label :keyword1, 'キーワード①', class: "block font-medium mb-1" %>
-      <%= f.text_field :keyword1, class: "mt-1 block w-full border border-gray-300 rounded bg-white p-2" %>
-    </div>
-
-    <%# キーワード② %>
-    <div class="mb-4">
-      <%= f.label :keyword2, 'キーワード②', class: "block font-medium mb-1" %>
-      <%= f.text_field :keyword2, class: "mt-1 block w-full border border-gray-300 rounded bg-white p-2" %>
-    </div>
-
-    <%# 説明 %>
-    <div class="mb-4">
-      <%= f.label :description, '説明', class: "block font-medium mb-1" %>
-      <%= f.text_area :description, class: "mt-1 block w-full border border-gray-300 rounded bg-white p-2", rows: 3 %>
-    </div>
-
-    <%# 送信ボタン %>
-    <div class="text-center">
-      <%= f.submit "登録する", class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition" %>
-    </div>
-  <% end %>
+  </div>
 </div>

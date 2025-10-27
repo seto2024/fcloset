@@ -1,14 +1,19 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-50">
-  <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6 text-center">
-    <h1 class="text-xl font-bold text-gray-800 mb-6"><%= @item.name %>詳細</h1>
+<div class="min-h-screen bg-blue-50 py-8 px-4">
+  <div class="max-w-md mx-auto bg-white rounded-lg shadow p-6">
+
+    <h1 class="text-xl font-bold text-gray-800 mb-6 text-center">
+      <%= @item.name %> 詳細
+    </h1>
 
     <div class="flex justify-center mb-4">
+  <div class="w-48 h-48 flex items-center justify-center rounded-md bg-gray-100">
     <% if @item.image.attached? %>
-      <%= image_tag @item.image, class: "w-48 h-auto rounded-md" %>
+      <%= image_tag @item.image, class: "max-w-full max-h-full object-contain" %>
     <% else %>
-      <p class="text-gray-500">画像なし</p>
+      <span class="text-gray-400 text-sm">画像なし</span>
     <% end %>
-    </div>
+  </div>
+</div>
 
     <ul class="space-y-2 text-gray-700 text-sm">
       <li><strong>ブランド：</strong><%= @item.brand.presence || 'なし' %></li>
@@ -25,7 +30,13 @@
     </ul>
 
     <div class="mt-6 flex justify-center gap-4">
-      <%= link_to '編集する', edit_item_path(@item), class: 'text-blue-600 text-sm underline' %>
-    </div>
+  <%= link_to '編集する', edit_item_path(@item), class: 'bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 px-4 rounded' %>
+
+  <%= button_to '削除する', item_path(@item),
+    method: :delete,
+    form: { data: { turbo_confirm: "本当に削除しますか？" } },
+    class: 'bg-red-500 hover:bg-red-600 text-white text-sm py-2 px-4 rounded' %>
+</div>
+
   </div>
 </div>
