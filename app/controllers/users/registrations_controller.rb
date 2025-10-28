@@ -15,14 +15,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   # 登録後にログインさせずにログイン画面に飛ばす
-  def after_sign_in_path_for(resource)
-    if resource.first_login?
-      resource.update(first_login: true)
-      welcome_path
-    else
-      items_path
-    end
+ class Users::SessionsController < Devise::SessionsController
+  protected
+
+  def after_sign_up_path_for(resource)
+    resource.update(first_login: true) 
+    welcome_path
   end
+end
 
   # ↑ これだけでもOKだけど、念のため自動ログインそのものもスキップしたいなら:
   def sign_up(resource_name, resource)
