@@ -3,7 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
-    @user = User.new(sign_up_params)
+    @user = User.new(sign_up_params.merge(first_login: true))
     if @user.save
       redirect_to after_sign_up_path_for(@user), notice: "登録が完了しました"
     else
@@ -15,9 +15,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   # 登録後にログインさせずにログイン画面に飛ばす
-  def after_sign_up_path_for(resource)
-    resource.update(first_login: false)
-    welcome_path
+  def after_sign_in_path_for(resource)
+    if resource.first_login?
+      resource.update(first_login: false)
+      welcome_path
+    else
+      items_path
+    end
   end
 
   # ↑ これだけでもOKだけど、念のため自動ログインそのものもスキップしたいなら:
