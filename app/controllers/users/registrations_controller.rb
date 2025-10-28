@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # 登録後にログインさせずにログイン画面に飛ばす
   def after_sign_in_path_for(resource)
     if resource.first_login?
-      resource.update(first_login: false)
+      resource.update(first_login: true)
       welcome_path
     else
       items_path

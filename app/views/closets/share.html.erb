@@ -67,7 +67,7 @@
       <% if item.image.attached? %>
         <%= link_to item_path(item, from: "share") do %>
           <div class="item-image-wrapper">
-            <%= image_tag url_for(item.image), class: "item-image" %>
+            <%= image_tag item.image, class: "item-image" %>
           </div>
         <% end %>
       <% else %>
