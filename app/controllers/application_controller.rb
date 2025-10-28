@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :redirect_first_login
 
   def after_sign_in_path_for(resource)
     if resource.first_login?

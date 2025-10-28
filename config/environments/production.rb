@@ -97,4 +97,6 @@ Rails.application.configure do
 # Allow requests from any host (required for Render)
 config.hosts.clear
 config.action_mailer.default_url_options = { host: 'fcloset.onrender.com' }
+config.active_storage.resolve_model_to_route = :public
+config.active_storage.service_urls_expire_in = 1.week
 end
