@@ -76,3 +76,4 @@ gem "cssbundling-rails", "~> 1.4"
 gem "tailwindcss-rails", "~> 4.3"
 
 gem "image_processing", "~> 1.2"
+
