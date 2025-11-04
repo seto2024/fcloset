@@ -97,6 +97,16 @@ Rails.application.configure do
 # Allow requests from any host (required for Render)
 config.hosts.clear
 config.action_mailer.default_url_options = { host: 'fcloset.onrender.com' }
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  address:              "smtp.sendgrid.net",
+  port:                 587,
+  domain:               "yourdomain.com", # ← 任意。fcloset.com など（実在しなくてもOK）
+  user_name:            "apikey",         # 固定で "apikey"
+  password:             ENV["SENDGRID_API_KEY"],  # ← Renderの環境変数に入れる！
+  authentication:       :plain,
+  enable_starttls_auto: true
+}
 config.active_storage.resolve_model_to_route = :rails_storage_proxy
 config.active_storage.service_urls_expire_in = 1.week
 end
