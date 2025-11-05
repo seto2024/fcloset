@@ -57,6 +57,10 @@ class ItemsController < ApplicationController
     redirect_to items_path, notice: "アイテムを削除しました"
   end
 
+  def favorites
+    @items = current_user.favorited_items
+  end
+
   private
 
   def set_item
