@@ -58,7 +58,7 @@ class ItemsController < ApplicationController
   end
 
   def favorites
-    @items = current_user.favorited_items
+    @items = current_user.favorite_items
   end
 
   private
