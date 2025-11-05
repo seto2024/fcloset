@@ -1,0 +1,25 @@
+<div class="page-wrapper min-h-screen py-12">
+  <h2 class="text-center text-lg font-bold mb-6">お気に入り一覧 💖</h2>
+
+  <% if @items.any? %>
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+      <% @items.each do |item| %>
+        <div class="item-card mx-auto">
+          <% if item.image.attached? %>
+            <%= link_to item_path(item) do %>
+              <div class="item-image-wrapper">
+                <%= image_tag item.image, class: "item-image" %>
+              </div>
+            <% end %>
+          <% else %>
+            <%= link_to item.name, item_path(item), class: "block text-center p-4 text-sm" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center text-gray-600 mt-8">
+      お気に入りに登録されたアイテムはまだありません。
+    </p>
+  <% end %>
+</div>
