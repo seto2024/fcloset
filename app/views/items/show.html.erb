@@ -36,10 +36,10 @@
 
     <!-- お気に入りボタン -->
     <% if current_user.favorite_items.exists?(@item.id) %>
-      <%= button_to 'お気に入り解除 💔', item_favorite_path(@item), method: :delete,
+      <%= button_to 'お気に入り解除', item_favorite_path(@item), method: :delete,
           class: 'bg-yellow-400 hover:bg-yellow-500 text-white text-sm py-2 px-4 rounded' %>
     <% else %>
-      <%= button_to 'お気に入り登録 💖', item_favorites_path(@item), method: :post,
+      <%= button_to 'お気に入り登録', item_favorite_path(@item), method: :post,
           class: 'bg-pink-500 hover:bg-pink-600 text-white text-sm py-2 px-4 rounded' %>
     <% end %>
 
