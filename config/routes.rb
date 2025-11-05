@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'favorites/create'
+  get 'favorites/destroy'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: "users/registrations",
@@ -9,7 +11,10 @@ root 'home#index'
 
   get 'home/index'
   mount ActiveStorage::Engine => "/rails/active_storage"
-  resources :items
+  resources :items do
+    collection do
+      get :favorites
+    end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
  #root 'items#index'

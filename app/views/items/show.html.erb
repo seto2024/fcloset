@@ -30,15 +30,26 @@
     </ul>
 
     <% if user_signed_in? && current_user == @item.user %>
-    <div class="mt-6 flex justify-center gap-4">
-      <%= link_to '編集する', edit_item_path(@item), class: 'bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 px-4 rounded' %>
-  
-      <%= button_to '削除する', item_path(@item),
-        method: :delete,
-        form: { data: { turbo_confirm: "本当に削除しますか？" } },
-        class: 'bg-red-500 hover:bg-red-600 text-white text-sm py-2 px-4 rounded' %>
-    </div>
-  <% end %>
+  <div class="mt-6 flex justify-center gap-4">
+    <!-- 編集ボタン -->
+    <%= link_to '編集する', edit_item_path(@item), class: 'bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 px-4 rounded' %>
+
+    <!-- お気に入りボタン -->
+    <% if current_user.favorite_items.exists?(@item.id) %>
+      <%= button_to 'お気に入り解除 💔', item_favorite_path(@item), method: :delete,
+          class: 'bg-yellow-400 hover:bg-yellow-500 text-white text-sm py-2 px-4 rounded' %>
+    <% else %>
+      <%= button_to 'お気に入り登録 💖', item_favorites_path(@item), method: :post,
+          class: 'bg-pink-500 hover:bg-pink-600 text-white text-sm py-2 px-4 rounded' %>
+    <% end %>
+
+    <!-- 削除ボタン -->
+    <%= button_to '削除する', item_path(@item),
+      method: :delete,
+      form: { data: { turbo_confirm: "本当に削除しますか？" } },
+      class: 'bg-red-500 hover:bg-red-600 text-white text-sm py-2 px-4 rounded' %>
+  </div>
+<% end %>
 
   <% if params[:from] == "share" %>
   <div class="mt-6 text-center">

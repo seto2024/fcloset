@@ -2,6 +2,9 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image 
 
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by_users, through: :favorites, source: :user
+
   CATEGORIES = ['トップス', 'パンツ', 'スカート', 'ワンピース', 'コート', '小物', 'アクセサリー', 'バッグ', '靴', 'その他']
   COLORS = ['ホワイト', 'ブラック', 'グレー', 'レッド', 'ブルー', 'グリーン', 'イエロー', 'ピンク', 'ベージュ', 'ブラウン', 'パープル', 'その他']
   
