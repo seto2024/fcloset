@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'favorites/create'
-  get 'favorites/destroy'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: "users/registrations",
@@ -12,6 +10,7 @@ root 'home#index'
   get 'home/index'
   mount ActiveStorage::Engine => "/rails/active_storage"
   resources :items do
+    resource :favorite, only: [:create, :destroy]
     collection do
       get :favorites
     end
