@@ -61,6 +61,27 @@ class ItemsController < ApplicationController
     @items = current_user.favorite_items
   end
 
+  def quick_new
+    @item = Item.new
+  end
+
+  def quick_create
+    @item = current_user.items.build(item_params)
+
+    if @item.name.present? || @item.image.attached?
+      if @item.save
+        current_user.update(first_login: false)
+        redirect_to items_path, notice: "アイテムを登録しました！"
+      else
+        flash.now[:alert] = "登録に失敗しました"
+        render :quick_new, status: :unprocessable_entity
+      end
+    else
+      flash.now[:alert] = "画像またはタイトルを入力してください"
+      render :quick_new, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_item

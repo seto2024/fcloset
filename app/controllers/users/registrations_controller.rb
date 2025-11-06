@@ -1,42 +1,36 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-
+  # POST /resource
   def create
     @user = User.new(sign_up_params.merge(first_login: true))
     if @user.save
+      # Deviseが自動ログインしてwelcome_pathへリダイレクト
       redirect_to after_sign_up_path_for(@user), notice: "登録が完了しました"
     else
       render :new, status: :unprocessable_entity
     end
   end
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+
   protected
 
-  # 登録後にログインさせずにログイン画面に飛ばす
- class Users::SessionsController < Devise::SessionsController
-  protected
-
+  # ✅ サインアップ後の遷移先を指定
   def after_sign_up_path_for(resource)
-    resource.update(first_login: true) 
-    welcome_path
+    resource.update(first_login: true)  # 念のためフラグを立てておく
+    welcome_path                        # HowTosController#welcome へ
   end
-end
 
-  # ↑ これだけでもOKだけど、念のため自動ログインそのものもスキップしたいなら:
-  def sign_up(resource_name, resource)
-    # 自動ログインをスキップ（何もしない）
-  end
-  # GET /resource/sign_up
-  # def new
-  #   super
+  # ✅ 自動ログインをスキップしたい場合はコメント外す
+  # def sign_up(resource_name, resource)
+  #   # 何もしない = 自動ログインなし
   # end
+
   private
 
   def sign_up_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
+end
   # POST /resource
   # def create
   #   super

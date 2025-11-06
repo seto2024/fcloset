@@ -13,6 +13,8 @@ root 'home#index'
     resource :favorite, only: [:create, :destroy]
     collection do
       get :favorites
+      get :quick_new
+      post :quick_create
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
