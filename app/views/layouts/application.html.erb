@@ -35,12 +35,12 @@
           class: "text-blue-600 text-base no-underline cursor-help hover:text-blue-800" %>
     </div>
 
-    <% elsif controller_name == 'closets' && action_name == 'item' %>
-    <!-- シェアクローゼットのアイテム詳細 -->
-    <div class="flex items-center gap-2">
-      <%= link_to '← シェアクローゼットに戻る', share_closet_path,
-          class: "text-blue-600 hover:text-blue-800" %>
-    </div>
+    <% elsif controller_name == 'closets' && action_name == 'share' %>
+  <!-- シェアクローゼット（一覧 or 詳細）ページ -->
+  <div class="flex items-center gap-2">
+    <%= link_to '← シェアクローゼットに戻る', share_closet_path,
+        class: "text-blue-600 hover:text-blue-800" %>
+  </div>
 
     <% elsif controller_name == 'how_tos' && action_name == 'share_closet' %>
     <!-- シェアクローゼットの使い方ページ -->
