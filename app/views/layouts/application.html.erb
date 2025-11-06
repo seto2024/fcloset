@@ -27,7 +27,7 @@
 
     <nav class="nav-bar flex gap-4 p-2">
     <% if controller_name == 'closets' && action_name == 'share' %>
-      <!-- シェアクローゼット表示時だけ -->
+      <!-- シェアクローゼット一覧ページ -->
     <div class="flex items-center gap-2">
       <%= link_to '← マイクローゼットへ戻る', items_path, class: "text-blue-600" %>
       <%= link_to '？', share_closet_info_path, 
