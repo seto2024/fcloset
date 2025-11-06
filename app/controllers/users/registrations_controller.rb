@@ -14,13 +14,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  # ✅ サインアップ後の遷移先を指定
+  # サインアップ後の遷移先を指定
   def after_sign_up_path_for(resource)
     resource.update(first_login: true)  # 念のためフラグを立てておく
     welcome_path                        # HowTosController#welcome へ
   end
 
-  # ✅ 自動ログインをスキップしたい場合はコメント外す
+  # 自動ログインをスキップしたい場合はコメント外す
   # def sign_up(resource_name, resource)
   #   # 何もしない = 自動ログインなし
   # end
@@ -30,7 +30,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def sign_up_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
-end
   # POST /resource
   # def create
   #   super
