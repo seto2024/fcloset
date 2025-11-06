@@ -27,6 +27,7 @@ root 'home#index'
   get '/welcome', to: 'how_tos#welcome', as: :welcome
 
   get '/share_closet', to: 'closets#share', as: :share_closet
+  get '/share_closet_info', to: 'how_tos#share_closet', as: :share_closet_info
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

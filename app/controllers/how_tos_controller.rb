@@ -9,4 +9,7 @@ class HowTosController < ApplicationController
       redirect_to items_path
     end
   end
+  
+  def share_closet
+  end
 end
