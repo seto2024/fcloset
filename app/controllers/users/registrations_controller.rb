@@ -5,6 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new(sign_up_params.merge(first_login: true))
     if @user.save
+      sign_in(@user)
       # Deviseが自動ログインしてwelcome_pathへリダイレクト
       redirect_to after_sign_up_path_for(@user), notice: "登録が完了しました"
     else
