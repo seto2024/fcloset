@@ -1,0 +1,39 @@
+<div class="page-wrapper min-h-screen py-12">
+  <div class="max-w-md mx-auto bg-white rounded-lg shadow p-6">
+
+    <h1 class="text-xl font-bold text-gray-800 mb-6 text-center">
+      <%= @item.name %> 詳細
+    </h1>
+
+    <div class="flex justify-center mb-4">
+      <div class="w-48 h-48 flex items-center justify-center rounded-md bg-gray-100">
+        <% if @item.image.attached? %>
+          <%= image_tag @item.image, class: "max-w-full max-h-full object-contain" %>
+        <% else %>
+          <span class="text-gray-400 text-sm">画像なし</span>
+        <% end %>
+      </div>
+    </div>
+
+    <ul class="space-y-2 text-gray-700 text-sm">
+      <li><strong>ブランド：</strong><%= @item.brand.presence || 'なし' %></li>
+      <li><strong>カテゴリ：</strong><%= @item.category.presence || 'なし' %></li>
+      <li><strong>カラー：</strong><%= @item.color.presence || 'なし' %></li>
+
+      <% keywords = [@item.keyword1, @item.keyword2].map { |k| k.to_s.strip.downcase }.reject(&:blank?).uniq %>
+      <% if keywords.any? %>
+        <li><strong>キーワード：</strong><%= keywords.join(' / ') %></li>
+      <% end %>
+
+      <li><strong>値段：</strong><%= number_to_currency(@item.price, unit: "¥", precision: 0) %></li>
+      <li><strong>説明：</strong><%= @item.description.presence || 'なし' %></li>
+    </ul>
+
+    <!-- シェアクローゼット用：戻るボタンのみ -->
+    <div class="mt-8 text-center">
+      <%= link_to '← シェアクローゼットに戻る', share_closet_path,
+          class: 'text-blue-600 hover:text-blue-800 underline text-sm' %>
+    </div>
+
+  </div>
+</div>
