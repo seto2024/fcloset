@@ -106,7 +106,16 @@ class ItemsController < ApplicationController
 
   def redirect_first_login
     return unless user_signed_in? && current_user.first_login?
-    return if request.path == settings_path || request.path == destroy_user_session_path
+
+    allowed_paths = [
+    settings_path,
+    destroy_user_session_path,
+    welcome_path,
+    how_to_path,
+    quick_new_items_path
+  ]
+
+    return if [settings_path, destroy_user_session_path, welcome_path].include?(request.path)
     redirect_to settings_path
   end
 end
