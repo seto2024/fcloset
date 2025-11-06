@@ -8,7 +8,6 @@
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application.tailwind", "data-turbo-track": "reload" %>
    
-   
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
@@ -22,47 +21,51 @@
       <p style="color: red;"><%= alert %></p>
     <% end %>
     
-  <% if user_signed_in? %>
-    <p>こんにちは、<%= current_user.email %> さん！</p>
+    <% if user_signed_in? %>
+      <p>こんにちは、<%= current_user.email %> さん！</p>
 
-    <nav class="nav-bar flex gap-4 p-2">
-    <% if controller_name == 'closets' && action_name == 'share' %>
-      <!-- シェアクローゼット一覧ページ -->
-    <div class="flex items-center gap-2">
-      <%= link_to '← マイクローゼットへ戻る', items_path, class: "text-blue-600" %>
-      <%= link_to '？', share_closet_info_path, 
-          title: "シェアクローゼットの説明を見る", 
-          class: "text-blue-600 text-base no-underline cursor-help hover:text-blue-800" %>
-    </div>
+      <nav class="nav-bar flex gap-4 p-2">
 
-    <% elsif controller_name == 'closets' && action_name == 'share' %>
-  <!-- シェアクローゼット（一覧 or 詳細）ページ -->
-  <div class="flex items-center gap-2">
-    <%= link_to '← シェアクローゼットに戻る', share_closet_path,
-        class: "text-blue-600 hover:text-blue-800" %>
-  </div>
+        <% if params[:from] == 'share' %>
+          <!-- シェアクローゼットから来たとき（?from=share） -->
+          <div class="flex items-center gap-2">
+            <%= link_to '← シェアクローゼットに戻る', share_closet_path,
+                class: "text-blue-600 hover:text-blue-800" %>
+          </div>
 
-    <% elsif controller_name == 'how_tos' && action_name == 'share_closet' %>
-    <!-- シェアクローゼットの使い方ページ -->
-    <div class="flex items-center gap-2">
-      <%= link_to '← シェアクローゼットに戻る', share_closet_path,
-          class: "text-blue-600 hover:text-blue-800" %>
-    </div>
+        <% elsif controller_name == 'closets' && action_name == 'share' %>
+          <!-- シェアクローゼット一覧ページ -->
+          <div class="flex items-center gap-2">
+            <%= link_to '← マイクローゼットへ戻る', items_path, class: "text-blue-600" %>
+            <%= link_to '？', share_closet_info_path, 
+                title: "シェアクローゼットの説明を見る", 
+                class: "text-blue-600 text-base no-underline cursor-help hover:text-blue-800" %>
+          </div>
 
-    <% else %>
-      <!-- 通常のナビゲーション -->
-      <div class="flex gap-4">
-        <%= link_to '設定', settings_path, class: "text-blue-600" %>
-        <%= link_to 'アイテム一覧', items_path, class: "text-blue-600" %>
-        <%= link_to 'アイテム登録', new_item_path, class: "text-blue-600" %>
-      </div>
-  
-      <div>
-        <%= link_to '？', how_to_path, title: "このアプリの使い方を見る", class: "text-blue-600 text-base no-underline cursor-help" %>
-      </div>
+        <% elsif controller_name == 'how_tos' && action_name == 'share_closet' %>
+          <!-- シェアクローゼットの使い方ページ -->
+          <div class="flex items-center gap-2">
+            <%= link_to '← シェアクローゼットに戻る', share_closet_path,
+                class: "text-blue-600 hover:text-blue-800" %>
+          </div>
+
+        <% else %>
+          <!-- 通常のナビゲーション -->
+          <div class="flex gap-4">
+            <%= link_to '設定', settings_path, class: "text-blue-600" %>
+            <%= link_to 'アイテム一覧', items_path, class: "text-blue-600" %>
+            <%= link_to 'アイテム登録', new_item_path, class: "text-blue-600" %>
+          </div>
+      
+          <div>
+            <%= link_to '？', how_to_path, 
+                title: "このアプリの使い方を見る", 
+                class: "text-blue-600 text-base no-underline cursor-help" %>
+          </div>
+        <% end %>
+
+      </nav>
     <% end %>
-  </nav>
-  <% end %>
 
     <%= yield %>
   </body>
