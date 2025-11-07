@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :redirect_first_login
+  before_action :redirect_first_login, except: [:quick_new, :quick_create]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -114,9 +114,13 @@ class ItemsController < ApplicationController
       how_to_path,
       quick_new_items_path
     ]
-  
+
+    current_path = request.path
+    full_path = request.fullpath
+
     # URLパラメータ付きや部分一致でもOKにする
-    return if allowed_paths.any? { |p| request.path.start_with?(p) }
-  
+    return if allowed_paths.any? { |p| current_path.start_with?(p) || full_path.start_with?(p) }
+
     redirect_to settings_path
   end
+end
