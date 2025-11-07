@@ -1,4 +1,7 @@
 class HowTosController < ApplicationController
+
+skip_before_action :redirect_first_login, only: [:show, :welcome, :share_closet]
+
   def show
   end
 
