@@ -1,8 +1,9 @@
 <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6 mt-8">
   <h1 class="text-xl font-bold text-center mb-4">最初のアイテムを登録しよう!</h1>
-  <p class="text-center text-gray-600 mb-6 text-sm">
-    画像かタイトルどちらかだけでOK！</p>
-  <p class="text-center text-gray-600 mb-6 text-sm">あとで詳しく編集できます。</p>
+  <p class="text-center text-gray-600 mb-0 text-sm">
+  画像かタイトルどちらかだけでOK！<br>
+  あとで詳しく編集できます。
+  </p>
 
   <%= form_with model: @item, url: quick_create_items_path, local: true do |f| %>
       <div class="space-y-4 text-sm text-gray-700">
