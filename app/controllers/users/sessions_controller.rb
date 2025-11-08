@@ -6,7 +6,6 @@ class Users::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     if resource.first_login?
-      resource.update(first_login: false)
       welcome_path
     else
       items_path
