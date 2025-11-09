@@ -8,6 +8,8 @@ class Item < ApplicationRecord
   has_many :item_tags, dependent: :destroy
   has_many :tags, through: :item_tags
 
+  accepts_nested_attributes_for :tags
+
   CATEGORIES = ['トップス', 'パンツ', 'スカート', 'ワンピース', 'コート', '小物', 'アクセサリー', 'バッグ', '靴', 'その他']
   COLORS = ['ホワイト', 'ブラック', 'グレー', 'レッド', 'ブルー', 'グリーン', 'イエロー', 'ピンク', 'ベージュ', 'ブラウン', 'パープル', 'その他']
   
