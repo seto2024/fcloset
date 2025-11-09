@@ -24,6 +24,7 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @tags = Tag.all
   end
 
   def create
@@ -42,6 +43,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
+    @tags = Tag.all
+end
   end
 
   def update
