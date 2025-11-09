@@ -13,6 +13,14 @@ themes = [
   { name: 'ダーク', css_class: 'theme-dark' }
 ]
 
+Tag.create!([
+  { name: 'かわいい' },
+  { name: 'クール' },
+  { name: 'シンプル' },
+  { name: 'カジュアル' },
+  { name: 'フェミニン' }
+])
+
 themes.each do |theme|
   Theme.find_or_create_by!(name: theme[:name]) do |t|
     t.css_class = theme[:css_class]
