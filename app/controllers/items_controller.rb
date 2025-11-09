@@ -29,6 +29,7 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.build(item_params)
     if @item.save
+      @item.tags = Tag.where(id: params[:item][:tag_ids]) if params[:item][:tag_ids].present?
       current_user.update_column(:first_login, false) if current_user.first_login?
       redirect_to items_path, notice: "アイテムを登録しました"
     else
@@ -45,6 +46,7 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
+      @item.tags = Tag.where(id: params[:item][:tag_ids]) if params[:item][:tag_ids].present?
       redirect_to items_path, notice: "アイテムを更新しました"
     else
       flash.now[:alert] = "更新に失敗しました"
@@ -100,7 +102,8 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(
       :image, :name, :description, :brand, :category,
-      :price, :color, :keyword1, :keyword2, :public
+      :price, :color, :keyword1, :keyword2, :public,
+      tag_ids: []
     )
   end
 

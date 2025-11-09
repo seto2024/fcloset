@@ -93,6 +93,19 @@
         </div>
       </div>
 
+      <div>
+  <%= f.label :tag_ids, 'タグ（複数選択可）', class: "block font-medium mb-1" %>
+  <div class="flex flex-wrap gap-2">
+    <% Tag.all.each do |tag| %>
+      <label class="flex items-center space-x-1 text-sm border rounded-full px-3 py-1 cursor-pointer hover:bg-pink-50">
+        <%= check_box_tag "item[tag_ids][]", tag.id, @item.tags.include?(tag),
+            id: "tag_#{tag.id}", class: "accent-pink-500" %>
+        <span><%= tag.name %></span>
+      </label>
+    <% end %>
+  </div>
+</div>
+
 <%# シェアクローゼット公開フラグ %>
         <div>
           <%= f.label :public, 'シェアクローゼットに公開する', class: "inline-flex items-center" %>
