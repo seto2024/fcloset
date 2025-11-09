@@ -45,7 +45,6 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @tags = Tag.all
-end
   end
 
   def update
