@@ -30,10 +30,10 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.build(item_params)
     if @item.save
-      @item.tags = Tag.where(id: params[:item][:tag_ids]) if params[:item][:tag_ids].present?
       current_user.update_column(:first_login, false) if current_user.first_login?
       redirect_to items_path, notice: "アイテムを登録しました"
     else
+      @tags = Tag.all 
       flash.now[:alert] = "登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
@@ -49,9 +49,9 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      @item.tags = Tag.where(id: params[:item][:tag_ids]) if params[:item][:tag_ids].present?
       redirect_to items_path, notice: "アイテムを更新しました"
     else
+      @tags = Tag.all 
       flash.now[:alert] = "更新に失敗しました"
       render :edit, status: :unprocessable_entity
     end
