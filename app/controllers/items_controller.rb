@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :redirect_first_login, except: [:quick_new, :quick_create]
   before_action :set_item, only: [:show, :edit, :update, :destroy, :remove_white_bg]
+  skip_before_action :verify_authenticity_token, only: [:remove_white_bg]
 
   def index
     @items = current_user.items
