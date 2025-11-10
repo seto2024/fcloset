@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :redirect_first_login
   skip_before_action :verify_authenticity_token, only: [:remove_white_bg]
 
   def after_sign_in_path_for(resource)
