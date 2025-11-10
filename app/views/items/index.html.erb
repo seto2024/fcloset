@@ -37,6 +37,14 @@
     </div>
 
     <div>
+      <%= select_tag "tag_ids[]",
+        options_from_collection_for_select(@tags, :id, :name, params[:tag_ids]),
+        multiple: true,
+        prompt: '-- タグ --',
+        class: "border border-gray-300 rounded px-2 py-1 w-36 bg-white" %>
+    </div>
+
+    <div>
         <%= link_to "お気に入り一覧", favorites_items_path,
           class: "border border-gray-300 rounded px-2 py-1 w-36 inline-block text-center text-gray-700 bg-white hover:bg-gray-100" %>
       </div>
