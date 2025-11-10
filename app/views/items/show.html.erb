@@ -50,10 +50,10 @@
     <!-- お気に入りボタン -->
     <% if current_user.favorite_items.exists?(@item.id) %>
       <%= button_to 'お気に入り解除', item_favorite_path(@item), method: :delete,
-        class: '!bg-amber-400 hover:!bg-amber-500 !text-white text-sm py-2 px-4 rounded !opacity-100 !visible !z-50 relative !bg-opacity-100' %>
+        class: '!bg-amber-400 hover:!bg-amber-500 !text-white text-sm py-2 px-4 rounded !border-none !shadow-md !opacity-100 !bg-opacity-100 transition' %>
     <% else %>
       <%= button_to 'お気に入り登録', item_favorite_path(@item), method: :post,
-        class: '!bg-rose-500 hover:!bg-rose-600 !text-white text-sm py-2 px-4 rounded !opacity-100 !visible !z-50 relative !bg-opacity-100' %>
+        class: '!bg-rose-500 hover:!bg-rose-600 !text-white text-sm py-2 px-4 rounded !border-none !shadow-md !opacity-100 !bg-opacity-100 transition' %>
     <% end %>
 
     <!-- 削除ボタン -->
