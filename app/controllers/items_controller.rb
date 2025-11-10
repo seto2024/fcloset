@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   def index
     @items = current_user.items
     
-    if params[:tag_ids].present?
+    if params[:tag_id].present?
       @items = @items.joins(:tags).where(tags: { id: params[:tag_id] }).distinct
     end  
 
