@@ -1,5 +1,5 @@
 class ClosetsController < ApplicationController
-  skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:show, :share]
 
   def share
     @items = Item.where(public: true)
@@ -13,6 +13,7 @@ class ClosetsController < ApplicationController
 
     if @item.nil?
       redirect_to share_closet_path, alert: "このアイテムは公開されていません。"
+      return
     end
   end
 end
