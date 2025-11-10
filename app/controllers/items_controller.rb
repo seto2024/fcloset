@@ -24,6 +24,8 @@ class ItemsController < ApplicationController
     elsif params[:sort] == 'price_desc'
       @items = @items.order(Arel.sql('price DESC NULLS LAST'))
     end
+
+    @tags = Tag.all
   end
 
   def new
