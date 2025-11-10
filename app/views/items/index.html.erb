@@ -37,9 +37,9 @@
     </div>
 
     <div>
-      <%= select_tag "tag_ids[]",
-        options_from_collection_for_select(@tags, :id, :name, params[:tag_ids]),
-        multiple: true,
+      <%= select_tag :tag_id,
+        options_from_collection_for_select(@tags, :id, :name, params[:tag_id]),
+        prompt: '-- タグ --',
         class: "border border-gray-300 rounded px-2 py-1 w-36 bg-white cursor-pointer appearance-none" %>
     </div>
 
