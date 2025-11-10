@@ -131,6 +131,10 @@ class ItemsController < ApplicationController
 
   private
 
+  def set_tags
+    @tags = Tag.all
+  end
+
   def set_item
     # まずは、自分のアイテムを探す
     @item = current_user.items.find_by(id: params[:id]) if user_signed_in?
