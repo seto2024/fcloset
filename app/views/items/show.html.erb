@@ -42,7 +42,7 @@
   </div>
 <% end %>
 
-    <% if user_signed_in? && current_user == @item.user %>
+    <% if user_signed_in? && current_user == @item.user && !params[:from_share] %>
   <div class="mt-6 flex justify-center gap-4">
     <!-- 編集ボタン -->
     <%= link_to '編集する', edit_item_path(@item), class: 'bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 px-4 rounded' %>
