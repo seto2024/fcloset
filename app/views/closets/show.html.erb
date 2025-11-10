@@ -1,3 +1,17 @@
+<% content_for :ogp do %>
+  <meta property="og:title" content="<%= @item.name.presence || 'Fcloset - シェアクローゼット' %>" />
+  <meta property="og:description" content="<%= @item.description.presence || 'お気に入りのファッションアイテムをチェック！' %>" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="<%= request.original_url %>" />
+  <meta property="og:image" content="<%= @item.image.attached? ? url_for(@item.image) : asset_url('ogp_default.png') %>" />
+  <meta property="og:site_name" content="Fcloset" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="<%= @item.name.presence || 'Fcloset - シェアクローゼット' %>" />
+  <meta name="twitter:description" content="<%= @item.description.presence || 'お気に入りのファッションアイテムをチェック！' %>" />
+  <meta name="twitter:image" content="<%= @item.image.attached? ? url_for(@item.image) : asset_url('ogp_default.png') %>" />
+<% end %>
+
 <div class="page-wrapper min-h-screen py-12">
   <div class="max-w-md mx-auto bg-white rounded-lg shadow p-6">
 
