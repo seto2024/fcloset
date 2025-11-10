@@ -1,5 +1,6 @@
 class ClosetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :share]
+  skip_before_action :redirect_first_login, only: [:share, :show]
 
   def share
     @items = Item.where(public: true)
