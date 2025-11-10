@@ -136,13 +136,14 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    # まずは、自分のアイテムを探す
-    @item = current_user.items.find_by(id: params[:id]) if user_signed_in?
+    if action_name == 'show'
+      # showアクションだけは公開アイテムも見られる
+      @item = current_user&.items&.find_by(id: params[:id]) || Item.find_by(id: params[:id], public: true)
+    else
+      # それ以外のアクションは自分のアイテムのみ操作可能
+      @item = current_user.items.find_by(id: params[:id])
+    end
   
-    # 自分のアイテムが見つからなければ、publicなアイテムを探す
-    @item ||= Item.find_by(id: params[:id], public: true)
-  
-    # それでも見つからなければアクセス拒否
     unless @item
       redirect_to root_path, alert: "このアイテムを見る権限がありません"
     end
