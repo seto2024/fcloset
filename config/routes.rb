@@ -13,6 +13,7 @@ root 'home#index'
     resource :favorite, only: [:create, :destroy]
     member do
       post :remove_white_bg
+      post :restore_original_image
     end
     collection do
       get :favorites
