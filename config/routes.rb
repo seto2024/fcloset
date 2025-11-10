@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pages/terms'
+  get 'pages/privacy'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: "users/registrations",
@@ -36,6 +38,9 @@ root 'home#index'
   get '/share_closet', to: 'closets#share', as: :share_closet
   get '/share_closet_info', to: 'how_tos#share_closet', as: :share_closet_info
   get '/share_closet/:id', to: 'closets#show', as: :share_closet_item
+
+  get '/terms', to: 'pages#terms', as: :terms
+  get '/privacy', to: 'pages#privacy', as: :privacy
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

@@ -109,4 +109,7 @@ config.action_mailer.smtp_settings = {
 }
 config.active_storage.resolve_model_to_route = :rails_storage_proxy
 config.active_storage.service_urls_expire_in = 1.week
+
+# OGPやActiveStorageのURL生成で使う本番ホスト設定
+Rails.application.routes.default_url_options[:host] = "https://fcloset-myy9.onrender.com"
 end
