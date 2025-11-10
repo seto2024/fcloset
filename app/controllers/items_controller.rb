@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :redirect_first_login, except: [:quick_new, :quick_create]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :remove_white_bg]
 
   def index
     @items = current_user.items
@@ -49,7 +49,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
     @tags = Tag.all
   end
 
@@ -67,6 +66,43 @@ class ItemsController < ApplicationController
     @item.destroy
     redirect_to items_path, notice: "アイテムを削除しました"
   end
+
+  require "mini_magick"
+
+  def remove_white_bg
+    @item = Item.find(params[:id])
+
+    if @item.image.attached?
+      # ActiveStorageの実ファイルパスを取得
+      image_path = ActiveStorage::Blob.service.path_for(@item.image.key)
+
+      # 出力ファイルの一時保存先
+      output_path = Rails.root.join("tmp", "removed_bg_#{SecureRandom.hex(4)}.png")
+
+      image = MiniMagick::Image.open(image_path)
+      image.format "png"
+      image.colorspace "RGB"
+
+      # 白背景を透過（fuzzは透過の“許容範囲”）
+      image.fuzz "15%"
+      image.transparent "white"
+
+      image.write(output_path)
+
+      # 古い画像を削除して新しい透過画像を保存
+      @item.image.purge
+      @item.image.attach(
+        io: File.open(output_path),
+        filename: "removed_bg.png",
+        content_type: "image/png"
+      )
+
+      redirect_to @item, notice: "背景を透過しました！"
+    else
+      redirect_to @item, alert: "画像がありません。"
+    end
+  end
+
 
   def favorites
     @items = current_user.favorite_items

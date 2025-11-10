@@ -11,6 +11,9 @@ root 'home#index'
   mount ActiveStorage::Engine => "/rails/active_storage"
   resources :items do
     resource :favorite, only: [:create, :destroy]
+    member do
+      post :remove_white_bg
+    end
     collection do
       get :favorites
       get :quick_new
