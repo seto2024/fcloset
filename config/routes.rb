@@ -21,6 +21,16 @@ root 'home#index'
       post :quick_create
     end
   end
+
+  def restore_original_image
+    @item = Item.find(params[:id])
+  
+    if @item.image.attached?
+      redirect_to edit_item_path(@item), notice: "（デモ）元の画像に戻しました！（実際はまだ保存していません）"
+    else
+      redirect_to edit_item_path(@item), alert: "画像がありません。"
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
  #root 'items#index'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
