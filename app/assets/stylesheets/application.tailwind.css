@@ -3,119 +3,120 @@
 @import "tailwindcss/utilities";
 
 @layer components {
-    /* ▼ カード背景サイズ調整＆中央寄せ用 */
-    .item-card {
-      @apply w-[110px] h-[170px] sm:w-[120px] sm:h-[180px] md:w-[130px] md:h-[190px] lg:w-[140px] lg:h-[200px];
-      @apply rounded-md shadow-sm flex justify-center items-center mx-auto;
-    }
+  /* ▼ カード背景サイズ調整＆中央寄せ用 */
+  .item-card {
+    @apply w-[110px] h-[170px] sm:w-[120px] sm:h-[180px] md:w-[130px] md:h-[190px] lg:w-[140px] lg:h-[200px];
+    @apply rounded-md shadow-sm flex justify-center items-center mx-auto;
+  }
 
-    /* ▼ 画像サイズ調整 */
+  /* ▼ 画像サイズ調整 */
+  .item-image-wrapper {
+    @apply w-[90px] h-[135px] overflow-hidden bg-gray-100 rounded;
+  }
+
+  .item-image {
+    @apply w-full h-full object-cover;
+  }
+
+  @screen sm {
     .item-image-wrapper {
-      @apply w-[90px] h-[135px] overflow-hidden bg-gray-100 rounded;
+      @apply w-[100px] h-[145px];
     }
+  }
 
-    .item-image {
-      @apply w-full h-full object-cover;
+  @screen md {
+    .item-image-wrapper {
+      @apply w-[110px] h-[155px];
     }
+  }
 
-    @screen sm {
-      .item-image-wrapper {
-        @apply w-[100px] h-[145px];
-      }
+  @screen lg {
+    .item-image-wrapper {
+      @apply w-[120px] h-[165px];
     }
+  }
 
-    @screen md {
-      .item-image-wrapper {
-        @apply w-[110px] h-[155px];
-      }
-    }
-
-    @screen lg {
-      .item-image-wrapper {
-        @apply w-[120px] h-[165px];
-      }
-    }
-    .theme-pastel input,
-    .theme-pastel select,
-    .theme-pastel textarea {
-      @apply bg-pink-100 border-pink-200;
-    }
+  .theme-pastel input,
+  .theme-pastel select,
+  .theme-pastel textarea {
+    @apply bg-pink-100 border-pink-200;
+  }
 }
 
-  @layer utilities {
-    /* ▼ テーマ：デフォルト（薄い青） */
-    .theme-default {
-      @apply bg-blue-50 text-gray-800;
-    }
-    .theme-default .item-card {
-        @apply bg-blue-200;
-      }
-    .theme-default .page-wrapper {
-        @apply bg-blue-50;
-      }
-      .theme-default .nav-bar {
-        @apply bg-blue-100;
-      }
-      
+@layer utilities {
+  /* ▼ テーマ：デフォルト（薄い青） */
+  .theme-default {
+    @apply bg-blue-50 text-gray-800;
+  }
+  .theme-default .item-card {
+    @apply bg-blue-200;
+  }
+  .theme-default .page-wrapper {
+    @apply bg-blue-50;
+  }
+  .theme-default .nav-bar {
+    @apply bg-blue-100;
+  }
 
-    /* ▼ テーマ：パステル（ピンク） */
-    .theme-pastel input,
-    .theme-pastel select,
-    .theme-pastel textarea {
-      @apply bg-pink-100 border-pink-200;
-    }
+  /* ▼ テーマ：パステル（ピンク） */
+  .theme-pastel input,
+  .theme-pastel select,
+  .theme-pastel textarea {
+    @apply bg-pink-100 border-pink-200;
+  }
 
-    .theme-pastel .item-card {
-        @apply bg-pink-200;
-      }
-      .theme-pastel .page-wrapper {
-        @apply bg-pink-50;
-      }
-      .theme-pastel .nav-bar {
-        @apply bg-pink-100;
-      }
-      
+  .theme-pastel .item-card {
+    @apply bg-pink-200;
+  }
+  .theme-pastel .page-wrapper {
+    @apply bg-pink-50;
+  }
+  .theme-pastel .nav-bar {
+    @apply bg-pink-100;
+  }
 
-    /* ▼ テーマ：ダーク（濃いグレー背景） */
-    .theme-dark input,
-    .theme-dark select,
-    .theme-dark textarea {
-      @apply bg-gray-800 border-gray-700;
-    }
+  /* ▼ テーマ：ダーク（濃いグレー背景） */
+  .theme-dark input,
+  .theme-dark select,
+  .theme-dark textarea {
+    @apply bg-gray-800 border-gray-700;
+  }
 
-    .theme-dark h1,
-    .theme-dark h2,
-    .theme-dark h3,
-    .theme-dark p,
-    .theme-dark label,
-    .theme-dark select,
-    .theme-dark input,
-    .theme-dark textarea {
-      @apply text-gray-100;
-    }
-    .theme-dark .item-card {
-        @apply bg-gray-400;
-      }
-    .theme-dark .page-wrapper {
-        @apply bg-gray-700;
-      }
-      .theme-dark .nav-bar {
-        @apply bg-gray-200;
-      }
-    }
+  .theme-dark h1,
+  .theme-dark h2,
+  .theme-dark h3,
+  .theme-dark p,
+  .theme-dark label,
+  .theme-dark select,
+  .theme-dark input,
+  .theme-dark textarea {
+    @apply text-gray-100;
+  }
+
+  .theme-dark .item-card {
+    @apply bg-gray-400;
+  }
+  .theme-dark .page-wrapper {
+    @apply bg-gray-700;
+  }
+  .theme-dark .nav-bar {
+    @apply bg-gray-200;
+  }
+}
+
 @layer base {
   /* ==== ボタンのデフォルトデザインを再定義 ==== */
   button, [type='button'], [type='submit'] {
-    @apply bg-rose-500 text-white rounded py-2 px-4 hover:bg-rose-600 transition;
+    @apply bg-rose-500 text-white rounded py-2 px-4 hover:bg-rose-600 transition !important;
   }
 
   /* お気に入り解除（黄色系）用 */
   .btn-amber {
-    @apply bg-amber-400 hover:bg-amber-500 text-white rounded py-2 px-4 transition;
+    @apply bg-amber-400 hover:bg-amber-500 text-white rounded py-2 px-4 transition !important;
   }
 
   /* 通常お気に入り登録（ピンク系）用 */
   .btn-rose {
-    @apply bg-rose-500 hover:bg-rose-600 text-white rounded py-2 px-4 transition;
+    @apply bg-rose-500 hover:bg-rose-600 text-white rounded py-2 px-4 transition !important;
   }
 }
