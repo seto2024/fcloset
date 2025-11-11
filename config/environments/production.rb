@@ -107,7 +107,7 @@ config.action_mailer.smtp_settings = {
   authentication:       :plain,
   enable_starttls_auto: true
 }
-config.active_storage.resolve_model_to_route = :rails_storage_proxy
+config.active_storage.resolve_model_to_route = :rails_storage_redirect
 config.active_storage.service_urls_expire_in = 1.week
 
 # OGPやActiveStorageのURL生成で使う本番ホスト設定
