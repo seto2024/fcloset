@@ -109,14 +109,16 @@
 
 <div>
   <%= f.label :tag_ids, 'タグ（複数選択可）', class: "block font-medium mb-1" %>
+
   <div class="flex flex-wrap gap-3">
     <% @tags.each do |tag| %>
-      <label class="flex items-center space-x-2 bg-pink-50 hover:bg-pink-100 border border-pink-200 rounded-full px-3 py-1 cursor-pointer transition">
-        <%= check_box_tag 'item[tag_ids][]', tag.id, @item.tag_ids.include?(tag.id), class: "w-4 h-4" %>
+      <%= label_tag "item_tag_#{tag.id}", class: "flex items-center space-x-2 bg-pink-50 hover:bg-pink-100 border border-pink-200 rounded-full px-3 py-1 cursor-pointer transition" do %>
+        <%= check_box_tag 'item[tag_ids][]', tag.id, @item.tag_ids.include?(tag.id), id: "item_tag_#{tag.id}", class: "w-4 h-4 accent-pink-500" %>
         <span class="text-gray-800 text-sm"><%= tag.name %></span>
-      </label>
+      <% end %>
     <% end %>
-    <!-- 何も選ばれなかったとき用のダミー -->
+
+    <!-- チェックがゼロのときでもパラメータを送るためのhidden -->
     <%= hidden_field_tag 'item[tag_ids][]', '' %>
   </div>
 </div>
