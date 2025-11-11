@@ -2,10 +2,19 @@
   <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
     <h1 class="text-xl font-bold mb-6 text-center text-gray-800">設定</h1>
      
-      <div class="mb-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded text-sm">
-  🎨 テーマカラーの変更機能は現在準備中です。  
-  今後のアップデートで利用できるようになります！
-</div>
+    <!-- 🎨 テーマカラー選択フォーム -->
+    <%= form_with(model: current_user, url: settings_path, method: :patch, local: true) do |f| %>
+      <div class="mb-6">
+        <%= f.label :theme_id, "テーマカラー", class: "block font-medium text-gray-700 mb-2" %>
+        <%= f.collection_select :theme_id, Theme.all, :id, :name,
+              { prompt: "テーマを選択してください" },
+              { class: "w-full border border-gray-300 rounded p-2 bg-white" } %>
+
+        <div class="text-center mt-4">
+          <%= f.submit "保存する", class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow" %>
+        </div>
+      </div>
+    <% end %>
 
   <div class="text-center mb-6">
     <%= link_to 'シェアクローゼット', share_closet_path, class: "text-blue-600 text-sm hover:underline" %>
