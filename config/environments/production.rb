@@ -96,7 +96,7 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 # Allow requests from any host (required for Render)
 config.hosts.clear
-config.action_mailer.default_url_options = { host: 'fcloset.onrender.com' }
+config.action_mailer.default_url_options = { host: 'fcloset-myy9.onrender.com', protocol: 'https' }
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
   address:              "smtp.sendgrid.net",
