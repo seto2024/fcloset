@@ -36,3 +36,7 @@ production:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+
+public:
+  service: Disk
+  root: <%= Rails.root.join("public/storage") %>
