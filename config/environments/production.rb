@@ -101,7 +101,7 @@ config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
   address:              "smtp.sendgrid.net",
   port:                 587,
-  domain:               "yourdomain.com", # ← 任意。fcloset.com など（実在しなくてもOK）
+  domain:               "onrender.com", # ← 任意。fcloset.com など（実在しなくてもOK）
   user_name:            "apikey",         # 固定で "apikey"
   password:             ENV["SENDGRID_API_KEY"],  # ← Renderの環境変数に入れる！
   authentication:       :plain,
