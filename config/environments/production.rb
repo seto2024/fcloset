@@ -96,14 +96,14 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 # Allow requests from any host (required for Render)
 config.hosts.clear
-config.action_mailer.default_url_options = { host: 'fcloset-myy9.onrender.com', protocol: 'https' }
+config.action_mailer.default_url_options = { host: 'fcloset-app.com', protocol: 'https' }
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
   address:              "smtp.sendgrid.net",
   port:                 587,
-  domain:               "onrender.com", # ← 任意。fcloset.com など（実在しなくてもOK）
-  user_name:            "apikey",         # 固定で "apikey"
-  password:             ENV["SENDGRID_API_KEY"],  # ← Renderの環境変数に入れる！
+  domain:               "fcloset-app.com",
+  user_name:            "apikey",
+  password:             ENV["SENDGRID_API_KEY"],
   authentication:       :plain,
   enable_starttls_auto: true
 }
@@ -111,5 +111,5 @@ config.active_storage.resolve_model_to_route = :rails_storage_redirect
 config.active_storage.service_urls_expire_in = 1.week
 
 # OGPやActiveStorageのURL生成で使う本番ホスト設定
-Rails.application.routes.default_url_options[:host] = "https://fcloset-myy9.onrender.com"
+Rails.application.routes.default_url_options[:host] = "fcloset-app.com"
 end
