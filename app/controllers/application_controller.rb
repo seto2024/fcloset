@@ -1,16 +1,6 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:index, :show]
   before_action :redirect_first_login
   skip_before_action :verify_authenticity_token, only: [:update, :remove_white_bg]
-
-  def after_sign_in_path_for(resource)
-    if resource.first_login?
-      resource.update(first_login: false)
-      welcome_path
-    else
-      items_path
-    end
-  end
 
   private
 
@@ -19,13 +9,16 @@ class ApplicationController < ActionController::Base
     return unless request.get?
     return if request.path.in?([
       how_to_path,
+      welcome_path,
       new_item_path,
       destroy_user_session_path,
       root_path,
       new_user_registration_path,
-      user_registration_path
+      user_registration_path,
+      new_user_session_path,
+      new_user_password_path
     ])
-    return if current_user&.first_login == false 
+    return if current_user&.first_login == false
 
     redirect_to how_to_path
   end
