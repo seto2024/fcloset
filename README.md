@@ -174,7 +174,7 @@ Fclosetは、自分の持っている洋服を登録して管理できるクロ�
 
 # ER図
 
-![ER図](https://gyazo.com/e81d20cebae1120ae2d680bfa6da0044)
+![ER図](https://i.gyazo.com/e81d20cebae1120ae2d680bfa6da0044.png)
 
 # UIデザイン
 
