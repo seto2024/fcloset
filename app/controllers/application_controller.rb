@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!, unless: :devise_controller?
   before_action :redirect_first_login
   skip_before_action :verify_authenticity_token, only: [:update, :remove_white_bg]
 
