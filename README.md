@@ -48,6 +48,28 @@ Fclosetは、自分の持っている洋服を登録して管理できるクロ�
 
 ---
 
+# 画面イメージ
+
+## ホーム画面
+![ホーム画面](images/login_page.png)
+
+## アイテム一覧
+![アイテム一覧](images/item_index.png)
+
+## アイテム詳細
+![アイテム詳細](images/item_create.png)
+
+
+# ER図
+
+![ER図](images/er_diagram.png)
+
+# UIデザイン
+
+Figma：https://www.figma.com/design/hZvgCsDVHEITebUBROoIy5/Fcloset?node-id=0-1&t=uqSCCYbQNPT1YNis-1
+
+---
+
 # 想定ユーザー
 
 主なユーザー層
@@ -169,13 +191,3 @@ Fclosetは、自分の持っている洋服を登録して管理できるクロ�
 
 - remove.bg API
 - OpenAI API
-
----
-
-# ER図
-
-![ER図](https://i.gyazo.com/e81d20cebae1120ae2d680bfa6da0044.png)
-
-# UIデザイン
-
-Figma：https://www.figma.com/design/hZvgCsDVHEITebUBROoIy5/Fcloset?node-id=0-1&t=uqSCCYbQNPT1YNis-1
