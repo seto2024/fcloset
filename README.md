@@ -6,8 +6,13 @@
 URL  
 https://fcloset-app.com
 
-※現在メール送信機能はSendGridの無料トライアル終了のため、パスワードリセットメールが送信できません 
+## 注意事項
+現在メール送信機能はSendGridの無料トライアル終了のため、パスワードリセットメールが送信できません。  
 今後Resendへの移行を予定しています。
+
+## テストについて
+RSpecは導入していますが、テスト整備は今後の課題としています。
+
 
 ---
 
@@ -158,6 +163,7 @@ Figma：https://www.figma.com/design/hZvgCsDVHEITebUBROoIy5/Fcloset?node-id=0-1&
 - コーディネート保存
 - アイテム / コーデのシェア機能
 - タグ分類
+
 
 ---
 
